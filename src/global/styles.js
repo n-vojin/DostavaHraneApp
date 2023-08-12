@@ -40,7 +40,7 @@ export const centerScreenForm = {
   marginRight: 'auto',
 };
 
-export const signInButton = {
+export const yellowButton = {
   backgroundColor: colors.DEFAULT_YELLOW,
   width: '40%',
   height: 50,
@@ -49,7 +49,31 @@ export const signInButton = {
   alignItems: 'center',
 };
 
-export const signInButtonText = {
+export const greenButton = {
+  backgroundColor: colors.SECONDARY_GREEN,
+  width: '100%',
+  height: 50,
+  borderRadius: 25,
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginTop: 10,
+  marginBottom: 10,
+};
+
+export const greenButtonOutline = {
+  backgroundColor: colors.gray5,
+  borderColor: colors.DEFAULT_GREEN,
+  borderWidth: 1,
+  width: '100%',
+  height: 50,
+  borderRadius: 25,
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginTop: 10,
+  marginBottom: 10,
+};
+
+export const yellowButtonText = {
   color: colors.gray1,
   textAlign: 'center',
 };

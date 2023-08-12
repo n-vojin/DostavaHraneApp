@@ -13,8 +13,8 @@ import {
   colors,
   naslov,
   centerScreenForm,
-  signInButton,
-  signInButtonText,
+  yellowButton,
+  yellowButtonText,
   basicText,
 } from '../../global/styles';
 
@@ -62,8 +62,8 @@ const SignInForm = () => {
               />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={{...signInButton}} onPress={handleSignIn}>
-            <Text style={{...signInButtonText}}>Uloguj se</Text>
+          <TouchableOpacity style={{...yellowButton}} onPress={handleSignIn}>
+            <Text style={{...yellowButtonText}}>Uloguj se</Text>
           </TouchableOpacity>
           <View style={styles.createAccountContainer}>
             <Text style={{...basicText}}>Još nisi registrovan?</Text>

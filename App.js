@@ -4,9 +4,10 @@ import Header from './src/components/Header';
 import {colors} from './src/global/styles';
 //import SignInScreen from './src/screens/authScreens/SignInScreen';
 import SignInForm from './src/screens/authScreens/SignInScreen';
+import WelcomeScreen from './src/screens/authScreens/WelcomeScreen';
 
 export default function App() {
-  return <SignInForm />;
+  return <WelcomeScreen />;
   return (
     <View style={styles.container}>
       <Header title="OVO JE TITLE" iconLeft="arrow-left" />
