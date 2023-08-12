@@ -2,17 +2,20 @@ import React from 'react';
 import {View, Text, StyleSheet, StatusBar} from 'react-native';
 import Header from './src/components/Header';
 import {colors} from './src/global/styles';
+//import SignInScreen from './src/screens/authScreens/SignInScreen';
+import SignInForm from './src/screens/authScreens/SignInScreen';
 
 export default function App() {
+  return <SignInForm />;
   return (
-    <View>
-      <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={colors.DEFAULT_GREEN}
-      />
-      <Header title="OVO JE TITLE" />
+    <View style={styles.container}>
+      <Header title="OVO JE TITLE" iconLeft="arrow-left" />
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

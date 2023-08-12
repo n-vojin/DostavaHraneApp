@@ -3,11 +3,11 @@ import {Text, View, StyleSheet, Dimensions, StatusBar} from 'react-native';
 import {colors, parameters} from '../global/styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default function Header({title}) {
+export default function Header({title, iconLeft}) {
   return (
     <View style={styles.header}>
       <Icon
-        name="arrow-left"
+        name={iconLeft}
         color={colors.GHOST_WHITE}
         size={28}
         onPress={() => {}}
@@ -26,11 +26,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     backgroundColor: colors.SECONDARY_GREEN,
-    position: 'absolute',
     height: parameters.headerHeight,
     alignItems: 'center',
     paddingLeft: 13,
     paddingRight: 13,
+    paddingBottom: 6,
   },
   headerText: {
     fontSize: 21,
