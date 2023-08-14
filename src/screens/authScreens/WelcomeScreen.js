@@ -1,18 +1,15 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
-import Header from '../../components/Header';
 import {
   colors,
   naslov,
   centerScreenForm,
-  yellowButton,
-  yellowButtonText,
   basicText,
   greenButton,
   greenButtonOutline,
 } from '../../global/styles';
 
-export default function WelcomeScreen() {
+export default function WelcomeScreen({navigation}) {
   return (
     <View style={styles.container}>
       <Text style={[{...naslov}, styles.velikiTekst]}>
@@ -21,17 +18,25 @@ export default function WelcomeScreen() {
 
       <View style={{...centerScreenForm}}>
         <Image
-          source={require('../../images/LogoColorful3.png')}
+          source={require('../../images/LogoColorful4.png')}
           style={styles.image}
           resizeMode="contain"
         />
         <Text style={styles.welcomeText}>Dobrodošli!</Text>
 
-        <TouchableOpacity style={{...greenButton, marginTop: 0}}>
+        <TouchableOpacity
+          style={{...greenButton, marginTop: 0}}
+          onPress={() => {
+            navigation.navigate('SignInScreen');
+          }}>
           <Text style={styles.textWhite}>Uloguj se</Text>
         </TouchableOpacity>
         <Text>ili</Text>
-        <TouchableOpacity style={{...greenButtonOutline}}>
+        <TouchableOpacity
+          style={{...greenButtonOutline}}
+          onPress={() => {
+            navigation.navigate('RegisterScreen');
+          }}>
           <Text style={{...basicText, fontSize: 16}}>Napravi nalog</Text>
         </TouchableOpacity>
       </View>
@@ -63,7 +68,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   velikiTekst: {
-    color: colors.DEFAULT_GREEN,
+    color: colors.SECONDARY_GREEN,
     fontSize: 18,
     fontWeight: '300',
     marginTop: '20%',

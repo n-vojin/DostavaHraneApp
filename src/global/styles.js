@@ -77,3 +77,39 @@ export const yellowButtonText = {
   color: colors.gray1,
   textAlign: 'center',
 };
+
+export const textInput = {
+  height: 48,
+  width: '100%',
+  borderWidth: 1,
+  borderRadius: 14,
+  borderColor: colors.gray3,
+  marginHorizontal: 20,
+  marginBottom: 20,
+  marginTop: 8,
+  paddingLeft: 20,
+};
+export const passwordInput = {
+  flex: 1,
+  height: 40,
+};
+export const passwordContainer = {
+  height: 49,
+  width: '100%',
+  flexDirection: 'row',
+  alignItems: 'center',
+  borderColor: colors.gray3,
+  borderWidth: 1,
+  borderRadius: 15,
+  marginBottom: 15,
+  paddingLeft: 10,
+  paddingRight: 15,
+};
+
+export const badgeStyle = {
+  top: -1.8,
+  right: -4,
+  minWidth: 18,
+  height: 18,
+  backgroundColor: 'red',
+};

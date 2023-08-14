@@ -16,40 +16,26 @@ import {
   yellowButton,
   yellowButtonText,
   basicText,
+  textInput,
+  passwordInput,
+  passwordContainer,
 } from '../../global/styles';
 
-const SignInForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
+const SignInScreen = ({navigation}) => {
   const [showPassword, setShowPassword] = useState(false);
-
-  const handleSignIn = () => {
-    // Perform sign-in logic here
-    console.log('Sign-in pressed');
-    console.log('Email:', email);
-    console.log('Password:', password);
-  };
 
   {
     return (
       <View style={styles.container}>
-        <Header title="Sign in" iconLeft="arrow-left" />
+        <Header title="Sign in" iconLeft="arrow-left" navigation={navigation} />
         <View style={[{...centerScreenForm, marginTop: '40%'}]}>
           <Text style={[{...naslov}]}>Sign in</Text>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="E-mail"
-            onChangeText={text => setEmail(text)}
-            value={email}
-          />
-          <View style={styles.passWordContainer}>
+          <TextInput style={{...textInput}} placeholder="E-mail" />
+          <View style={{...passwordContainer}}>
             <TextInput
-              style={styles.passwordInput}
+              style={{...passwordInput}}
               placeholder="Password"
               secureTextEntry={!showPassword}
-              onChangeText={text => setPassword(text)}
-              value={password}
             />
             <TouchableOpacity
               onPress={() => {
@@ -62,7 +48,13 @@ const SignInForm = () => {
               />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={{...yellowButton}} onPress={handleSignIn}>
+          <TouchableOpacity
+            style={{...yellowButton}}
+            onPress={() => {
+              //TODO Uloguj ga ***************************
+              navigation.navigate('HomeScreen');
+              //?????????????????????????????????????????????????????????????? ULOGUJ GA ***************************
+            }}>
             <Text style={{...yellowButtonText}}>Uloguj se</Text>
           </TouchableOpacity>
           <View style={styles.createAccountContainer}>
@@ -71,6 +63,7 @@ const SignInForm = () => {
               style={styles.clickableText}
               onPress={() => {
                 //Prebaci ga na stranicu za pravljenje naloga
+                navigation.navigate('RegisterScreen');
               }}>
               Napravi nalog
             </Text>
@@ -87,33 +80,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 
-  TextInput: {
-    height: 48,
-    width: '100%',
-    borderWidth: 1,
-    borderRadius: 12,
-    borderColor: colors.gray3,
-    marginHorizontal: 20,
-    marginBottom: 20,
-    marginTop: 8,
-    paddingLeft: 20,
-  },
-  passwordInput: {
-    flex: 1,
-    height: 40,
-  },
-  passWordContainer: {
-    height: 49,
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderColor: colors.gray3,
-    borderWidth: 1,
-    borderRadius: 12,
-    marginBottom: 15,
-    paddingLeft: 10,
-    paddingRight: 15,
-  },
   createAccountContainer: {
     height: 55,
     width: '80%',
@@ -128,4 +94,4 @@ const styles = StyleSheet.create({
     color: colors.black,
   },
 });
-export default SignInForm;
+export default SignInScreen;

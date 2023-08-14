@@ -1,17 +1,23 @@
 import React from 'react';
-import {Text, View, StyleSheet, Dimensions, StatusBar} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  StatusBar,
+} from 'react-native';
 import {colors, parameters} from '../global/styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default function Header({title, iconLeft}) {
+export default function Header({title, iconLeft, navigation, logo}) {
   return (
     <View style={styles.header}>
-      <Icon
-        name={iconLeft}
-        color={colors.GHOST_WHITE}
-        size={28}
-        onPress={() => {}}
-      />
+      <TouchableOpacity
+        onPress={() => {
+          navigation.goBack();
+        }}>
+        <Icon name={iconLeft} color={colors.GHOST_WHITE} size={28} />
+      </TouchableOpacity>
       <Text style={styles.headerText}>{title}</Text>
       <StatusBar
         barStyle={'light-content'}
