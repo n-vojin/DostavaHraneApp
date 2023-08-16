@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "770777345552",
+    "project_id": "foodie999",
+    "storage_bucket": "foodie999.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770777345552:android:770dc04571b4d362c0e495",
+        "android_client_info": {
+          "package_name": "com.dostavahraneapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "770777345552-6g4lvdrue7doqor4ij49vbdf4vjl6qqh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUeu-aOXqM6Ucs8N1drLRCcXtydvPSDZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "770777345552-6g4lvdrue7doqor4ij49vbdf4vjl6qqh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
