@@ -14,6 +14,8 @@ export const colors = {
   gray3: '#86939e',
   gray4: '#bdc6cf',
   gray5: '#e1e8ee',
+  gray6: '#ededed',
+  gray7: '#f5f5f5',
 };
 
 export const parameters = {

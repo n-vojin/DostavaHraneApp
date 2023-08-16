@@ -6,7 +6,7 @@ import RootNavigator from './src/navigation/RootNavigator';
 import HomeScreen from './src/screens/HomeScreen';
 
 export default function App() {
-  return <HomeScreen />;
+  return <RootNavigator />;
   return (
     <View style={styles.container}>
       <Header title="OVO JE TITLE" iconLeft="arrow-left" />

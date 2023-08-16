@@ -19,6 +19,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'flex-end',
+    marginBottom: 6,
+    backgroundColor: colors.GHOST_WHITE,
   },
   titleText: {
     fontSize: 20,
