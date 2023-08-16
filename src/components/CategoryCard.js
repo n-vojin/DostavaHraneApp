@@ -11,11 +11,7 @@ import {colors} from '../global/styles';
 const CategoryCard = ({imageUrl, title}) => {
   return (
     <TouchableOpacity style={styles.imageAndTitleContainer}>
-      <Image
-        style={styles.image}
-        source={{uri: imageUrl}}
-        resizeMode="center"
-      />
+      <Image style={styles.image} resizeMode="cover" source={imageUrl} />
 
       <Text style={styles.textWhite}>{title}</Text>
     </TouchableOpacity>
@@ -30,8 +26,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     marginTop: 64,
     marginLeft: 7,
-    textShadowRadius: 5,
-    textShadowColor: colors.gray3,
+    textShadowRadius: 10,
+    textShadowColor: colors.gray1,
   },
   image: {
     width: 90,

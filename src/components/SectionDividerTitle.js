@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     marginBottom: 6,
-    backgroundColor: colors.GHOST_WHITE,
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    marginLeft: 20,
   },
   titleText: {
     fontSize: 20,

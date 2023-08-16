@@ -17,12 +17,9 @@ export default function FoodCard({
   screenWidth,
 }) {
   return (
-    <TouchableOpacity style={{marginBottom: 10}}>
-      <View style={{...styles.cardView, width: screenWidth}}>
-        <Image
-          style={{...styles.image, width: screenWidth}}
-          source={{uri: images}}
-        />
+    <TouchableOpacity style={{marginBottom: 30}}>
+      <View style={{...styles.cardView, width: 255}}>
+        <Image style={{...styles.image, width: 255}} source={{uri: images}} />
 
         <View>
           <View
@@ -36,7 +33,7 @@ export default function FoodCard({
               style={{
                 display: 'flex',
                 flexDirection: 'row',
-                marginRight: 6,
+                marginRight: 10,
               }}>
               <Icon
                 name="star"
@@ -77,11 +74,12 @@ export default function FoodCard({
 const styles = StyleSheet.create({
   cardView: {
     backgroundColor: colors.white,
-    marginHorizontal: 4,
+    marginHorizontal: 8,
     borderTopRightRadius: 3,
     borderTopLeftRadius: 3,
     borderBottomLeftRadius: 3,
     borderBottomRightRadius: 3,
+    paddingBottom: 1,
   },
   image: {
     borderTopLeftRadius: 3,
