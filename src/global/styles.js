@@ -103,7 +103,8 @@ export const passwordContainer = {
   borderColor: colors.gray3,
   borderWidth: 1,
   borderRadius: 15,
-  marginBottom: 15,
+  marginTop: 8,
+  marginBottom: 20,
   paddingLeft: 10,
   paddingRight: 15,
 };

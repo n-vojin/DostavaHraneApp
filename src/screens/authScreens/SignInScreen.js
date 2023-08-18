@@ -27,9 +27,13 @@ const SignInScreen = ({navigation}) => {
   {
     return (
       <View style={styles.container}>
-        <Header title="Sign in" iconLeft="arrow-left" navigation={navigation} />
+        <Header
+          title="Prijavljivanje"
+          iconLeft="arrow-left"
+          navigation={navigation}
+        />
         <View style={[{...centerScreenForm, marginTop: '40%'}]}>
-          <Text style={[{...naslov}]}>Sign in</Text>
+          <Text style={[{...naslov}]}>Prijavi se</Text>
           <TextInput style={{...textInput}} placeholder="E-mail" />
           <View style={{...passwordContainer}}>
             <TextInput
