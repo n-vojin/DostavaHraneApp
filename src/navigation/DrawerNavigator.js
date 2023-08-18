@@ -1,4 +1,4 @@
-import react from 'react';
+import * as React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {View, Text} from 'react-native';
 import RootClientTabs from './ClientTabs';
@@ -15,6 +15,12 @@ export default function DrawerNavigator() {
         component={RootClientTabs}
         options={{
           title: 'Client',
+          headerShown: false,
+          drawerStyle: {
+            borderBottomRightRadius: 40,
+            borderTopRightRadius: 40,
+            paddingTop: 30,
+          },
           drawerIcon: ({focussed, size}) => (
             <Icon
               type="material-comunity"
