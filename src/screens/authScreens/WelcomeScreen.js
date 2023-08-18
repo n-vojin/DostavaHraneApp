@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import {
   colors,
@@ -9,23 +9,7 @@ import {
   greenButtonOutline,
 } from '../../global/styles';
 
-import firestore from '@react-native-firebase/firestore';
-
 export default function WelcomeScreen({navigation}) {
-  //  useEffect(() => {
-  //    try {
-  //      const unsubscribe = firestore()
-  //        .collection('restaurant')
-  //        .onSnapshot(doc => {
-  //          doc.forEach(d => {
-  //            console.log(d.data());
-  //          });
-  //        });
-  //      return () => unsubscribe();
-  //    } catch (error) {
-  //      console.log(error);
-  //    }
-  //  }, []);
   return (
     <View style={styles.container}>
       <Text style={[{...naslov}, styles.velikiTekst]}>
