@@ -17,7 +17,7 @@ export default function HomeHeader({iconLeft, navigation, logo}) {
     <View style={styles.header}>
       <TouchableOpacity
         onPress={() => {
-          navigation.goBack();
+          //TODO ADD HAMBURGER MENI
         }}>
         <Icon
           type="MaterialCommunityIcons"
