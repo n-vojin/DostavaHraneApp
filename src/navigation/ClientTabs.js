@@ -6,6 +6,7 @@ import MyAccountScreen from '../screens/MyAccountScreen';
 import MyOrderScreen from '../screens/MyOrdersScreen';
 import SearchScreen from '../screens/SearchScreen';
 import {colors} from '../global/styles';
+import RestaurantsMapScreen from '../screens/RestaurantsMapScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -13,8 +14,11 @@ export default function RootClientTabs() {
   return (
     <Tab.Navigator
       initialRouteName="HomeScreen"
-      barStyle={{backGroundColor: 'white'}}
-      screenOptions={{tabBarShowLabel: true}}>
+      activeColor={colors.DEFAULT_GREEN}
+      screenOptions={{
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: colors.SECONDARY_GREEN,
+      }}>
       <Tab.Screen
         name="HomeScreen"
         component={HomeScreen}
@@ -22,12 +26,7 @@ export default function RootClientTabs() {
           headerShown: false,
           tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (
-            <Icon
-              name="home"
-              type="material"
-              color={colors.GHOST_WHITE}
-              size={size}
-            />
+            <Icon name="home" type="material" color={color} size={28} />
           ),
         }}
       />
@@ -38,12 +37,7 @@ export default function RootClientTabs() {
           headerShown: false,
           tabBarLabel: 'Search',
           tabBarIcon: ({color, size}) => (
-            <Icon
-              name="search"
-              type="material"
-              color={colors.GHOST_WHITE}
-              size={size}
-            />
+            <Icon name="search" type="material" color={color} size={28} />
           ),
         }}
       />
@@ -57,8 +51,8 @@ export default function RootClientTabs() {
             <Icon
               name="truck-fast"
               type="material-community"
-              color={colors.GHOST_WHITE}
-              size={size}
+              color={color}
+              size={30}
             />
           ),
         }}
@@ -70,12 +64,18 @@ export default function RootClientTabs() {
           headerShown: false,
           tabBarLabel: 'Account',
           tabBarIcon: ({color, size}) => (
-            <Icon
-              name="person"
-              type="material"
-              color={colors.GHOST_WHITE}
-              size={size}
-            />
+            <Icon name="person" type="material" color={color} size={28} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="RestaurantsMapScreen"
+        component={RestaurantsMapScreen}
+        options={{
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarIcon: ({color, size}) => (
+            <Icon name="map" type="material" color={color} size={28} />
           ),
         }}
       />

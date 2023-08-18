@@ -5,6 +5,7 @@ import SignInScreen from '../screens/authScreens/SignInScreen';
 import HomeScreen from '../screens/HomeScreen';
 import RegisterScreen from '../screens/authScreens/RegisterScreen';
 import RootClientTabs from './ClientTabs';
+import DrawerNavigator from './DrawerNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,15 +31,15 @@ export default function AuthStack() {
         }}
       />
       <Stack.Screen
-        name="RootClientTabs"
-        component={RootClientTabs}
+        name="RegisterScreen"
+        component={RegisterScreen}
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="RegisterScreen"
-        component={RegisterScreen}
+        name="DrawerNavigator"
+        component={DrawerNavigator}
         options={{
           headerShown: false,
         }}
