@@ -135,7 +135,7 @@ export default function HomeScreen({navigation}) {
           <Icon
             name="place"
             type="material"
-            size={43}
+            size={35}
             color={colors.SECONDARY_GREEN}
             style={{paddingTop: 3}}
           />
@@ -143,7 +143,7 @@ export default function HomeScreen({navigation}) {
             style={{
               color: colors.gray2,
               paddingBottom: 3,
-              marginTop: -8,
+              marginTop: -5,
               paddingRight: 1.5,
             }}>
             Map
