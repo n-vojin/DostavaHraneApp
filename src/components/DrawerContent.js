@@ -43,6 +43,7 @@ export default function DrawerContent(props) {
       </DrawerContentScrollView>
       <SectionDividerTitle title={'Odjava'} />
       <DrawerItem
+        style={{borderBottomRightRadius: 25}}
         label="Odjavi se"
         icon={({color, size}) => (
           <Icon
