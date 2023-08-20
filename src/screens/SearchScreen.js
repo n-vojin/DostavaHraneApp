@@ -30,6 +30,7 @@ export default function SearchScreen({navigation}) {
               style={styles.imageAndTitleContainer}
               onPress={() => {
                 //TODO DODAJ ON PRESS FUNKC
+                navigation.navigate('SearchResultScreen', {item: item.name});
               }}>
               <Image
                 style={styles.imageBig}
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     textShadowRadius: 8,
     textShadowColor: colors.black,
-    backgroundColor: 'rgba(240, 240, 240, 0.6)',
+    backgroundColor: 'rgba(53, 54, 52, 0.5)',
     paddingHorizontal: 6,
     borderRadius: 3,
   },

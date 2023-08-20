@@ -105,13 +105,13 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: 'bold',
     paddingTop: 2,
-    color: colors.grey3,
+    color: colors.gray3,
   },
 
   address: {
     fontSize: 13,
     paddingTop: 2.5,
-    color: colors.grey2,
+    color: colors.gray2,
     paddingHorizontal: 4,
   },
   reviewText: {

@@ -126,7 +126,7 @@ export default function SearchComponent() {
                   setTextInputFossued(true);
                 }}>
                 <View style={styles.view2}>
-                  <Text style={{color: colors.grey2, fontSize: 15}}>
+                  <Text style={{color: colors.gray2, fontSize: 15}}>
                     {item.name}
                   </Text>
                 </View>

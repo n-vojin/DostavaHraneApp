@@ -7,6 +7,7 @@ import MyOrderScreen from '../screens/MyOrdersScreen';
 import SearchScreen from '../screens/SearchScreen';
 import {colors} from '../global/styles';
 import RestaurantsMapScreen from '../screens/RestaurantsMapScreen';
+import {ClientStack} from './ClientStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,8 +32,8 @@ export default function RootClientTabs() {
         }}
       />
       <Tab.Screen
-        name="SearchScreen"
-        component={SearchScreen}
+        name="ClientStack"
+        component={ClientStack}
         options={{
           headerShown: false,
           tabBarLabel: 'Search',
