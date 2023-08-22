@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Icon} from '@rneui/themed';
 import {colors, parameters} from '../global/styles';
+import {useNavigation} from '@react-navigation/native';
 
 export default function FoodCard({
   OnPressFoodCard,
@@ -16,8 +17,13 @@ export default function FoodCard({
   images,
   screenWidth,
 }) {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={{marginBottom: 30}}>
+    <TouchableOpacity
+      style={{marginBottom: 30}}
+      onPress={() => {
+        navigation.navigate('RestaurantScreen');
+      }}>
       <View style={{...styles.cardView, width: 255}}>
         <Image style={{...styles.image, width: 255}} source={{uri: images}} />
 

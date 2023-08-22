@@ -5,7 +5,12 @@ import {TouchableOpacity} from 'react-native';
 import {Icon} from '@rneui/base';
 import {Button} from '@rneui/base';
 
-export default function CartCard({restaurantName, orderContent, priceTotal}) {
+const deliveryPrice = 250; //TODO za IZMENITI (Dynamic Data)
+const priceTotal = 1250;
+const orderContent = '2x Burger, 3x Murger, 4x Gurger, 2x Cola';
+const restaurantName = 'McDonalds';
+
+export default function CartCard({}) {
   return (
     <View style={styles.containerCartCard}>
       <View style={styles.topContainer}>
@@ -20,7 +25,7 @@ export default function CartCard({restaurantName, orderContent, priceTotal}) {
             type="material"
             name="remove-circle-outline"
             size={30}
-            color={colors.GHOST_WHITE}
+            color={colors.SECONDARY_GREEN}
           />
         </Button>
       </View>
@@ -28,22 +33,19 @@ export default function CartCard({restaurantName, orderContent, priceTotal}) {
       <View style={styles.botContainer}>
         <ScrollView style={styles.orderDetailContainer}>
           <Text style={styles.text1}>Restoran: {restaurantName}</Text>
-          <Text style={styles.text2}>
-            {orderContent}
-            2x Burger, 3x Murger, 4x Gurger, 2x Cola
-          </Text>
-          <Text style={styles.text2}>aaa</Text>
+          <Text style={styles.text2}>{orderContent}</Text>
+          <Text style={styles.text2}>Cena dostave: {deliveryPrice} RSD</Text>
         </ScrollView>
         <View
           style={{
             flexDirection: 'row',
             borderTopWidth: 1,
             borderLeftWidth: 1,
-            borderColor: colors.DEFAULT_GREEN,
+            borderColor: colors.SECONDARY_GREEN,
             paddingLeft: 8,
             borderTopLeftRadius: 10,
           }}>
-          <Text style={styles.cenaTekst}>{priceTotal}1000 RSD</Text>
+          <Text style={styles.cenaTekst}>Ukupno: {priceTotal}.00 din</Text>
           <Button
             buttonStyle={styles.confirmButton}
             style={styles.confirmButton}
@@ -54,7 +56,7 @@ export default function CartCard({restaurantName, orderContent, priceTotal}) {
               type="material"
               name="check-circle-outline"
               size={30}
-              color={colors.GHOST_WHITE}
+              color={colors.DEFAULT_YELLOW}
             />
           </Button>
         </View>
@@ -101,14 +103,14 @@ const styles = StyleSheet.create({
   },
   cancelButton: {
     width: 70,
-    backgroundColor: colors.CANCEL_BUTTON_RED,
+    backgroundColor: colors.DEFAULT_YELLOW,
     alignItems: 'center',
     justifyContent: 'center',
     borderTopRightRadius: 25,
   },
   confirmButton: {
     width: 70,
-    backgroundColor: colors.DEFAULT_GREEN,
+    backgroundColor: colors.SECONDARY_GREEN,
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomRightRadius: 25,

@@ -7,7 +7,8 @@ import MyOrderScreen from '../screens/MyOrdersScreen';
 import SearchScreen from '../screens/SearchScreen';
 import {colors} from '../global/styles';
 import RestaurantsMapScreen from '../screens/RestaurantsMapScreen';
-import {ClientStack} from './ClientStack';
+import {SearchScreenStack} from './SearchScreenStack';
+import {HomeScreenStack} from './HomeScreenStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,8 +22,8 @@ export default function RootClientTabs() {
         tabBarActiveTintColor: colors.SECONDARY_GREEN,
       }}>
       <Tab.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="HomeScreenStack"
+        component={HomeScreenStack}
         options={{
           headerShown: false,
           tabBarLabel: 'Home',
@@ -32,8 +33,8 @@ export default function RootClientTabs() {
         }}
       />
       <Tab.Screen
-        name="ClientStack"
-        component={ClientStack}
+        name="SearchScreenStack"
+        component={SearchScreenStack}
         options={{
           headerShown: false,
           tabBarLabel: 'Search',

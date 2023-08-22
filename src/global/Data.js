@@ -10,6 +10,46 @@ export const filterData = [
   {name: 'Coffee', image: require('../assets/coffee.png'), id: '8'},
   {name: 'Desserts', image: require('../assets/desserts.png'), id: '9'},
 ];
+
+export const productData1 = [
+  {
+    name: 'Pomfrit XL',
+    price: 300.0,
+    image:
+      'https://beoshoppingcenter.rs/wp-content/uploads/2020/02/McD_Sajt-Us%CC%8Cc%CC%81e_Pomfrit_650x650.jpg',
+  },
+  {
+    name: 'Big Mac',
+    price: 340.0,
+    image:
+      'https://image.cnbcfm.com/api/v1/image/107016405-1645041786514-GettyImages-1128021770_1.jpg?v=1645043552',
+  },
+  {
+    name: 'Chicken Burger',
+    price: 440.0,
+    image:
+      'https://www.pngitem.com/pimgs/m/484-4840724_mcdonalds-chicken-big-mac-hd-png-download.png',
+  },
+  {
+    name: 'Pomfrit XL',
+    price: 340.0,
+    image:
+      'https://beoshoppingcenter.rs/wp-content/uploads/2020/02/McD_Sajt-Us%CC%8Cc%CC%81e_Pomfrit_650x650.jpg',
+  },
+  {
+    name: 'Big Mac',
+    price: 340.0,
+    image:
+      'https://image.cnbcfm.com/api/v1/image/107016405-1645041786514-GettyImages-1128021770_1.jpg?v=1645043552',
+  },
+  {
+    name: 'Chicken Burger',
+    price: 340.0,
+    image:
+      'https://www.pngitem.com/pimgs/m/484-4840724_mcdonalds-chicken-big-mac-hd-png-download.png',
+  },
+];
+
 export const restaurantsData = [
   {
     restaurantName: 'Mc Donalds',
@@ -26,19 +66,22 @@ export const restaurantsData = [
     foodType: 'Burgers, Wraps,Milkshakes...',
     productData: [
       {
-        name: 'Hand cut chips',
+        name: 'Pomfrit XL',
         price: 29.3,
-        image: 'https://bukasapics.s3.us-east-2.amazonaws.com/plate5.png',
+        image:
+          'https://beoshoppingcenter.rs/wp-content/uploads/2020/02/McD_Sajt-Us%CC%8Cc%CC%81e_Pomfrit_650x650.jpg',
       },
       {
         name: 'Big Mac',
         price: 50.8,
-        image: 'https://bukasapics.s3.us-east-2.amazonaws.com/plate4.png',
+        image:
+          'https://image.cnbcfm.com/api/v1/image/107016405-1645041786514-GettyImages-1128021770_1.jpg?v=1645043552',
       },
       {
         name: 'Chicken Burger',
         price: 70,
-        image: 'https://bukasapics.s3.us-east-2.amazonaws.com/plate3.png',
+        image:
+          'https://www.pngitem.com/pimgs/m/484-4840724_mcdonalds-chicken-big-mac-hd-png-download.png',
       },
     ],
     id: 0,

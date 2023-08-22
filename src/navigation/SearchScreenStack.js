@@ -6,7 +6,7 @@ import SearchResultScreen from '../screens/SearchResultScreen';
 
 const ClientSearch = createNativeStackNavigator();
 
-export function ClientStack() {
+export function SearchScreenStack() {
   return (
     <ClientSearch.Navigator>
       <ClientSearch.Screen

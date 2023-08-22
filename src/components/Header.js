@@ -34,8 +34,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.SECONDARY_GREEN,
     height: parameters.headerHeight,
     alignItems: 'center',
-    paddingLeft: 13,
-    paddingRight: 13,
+    paddingHorizontal: 20,
     paddingBottom: 6,
   },
   headerText: {

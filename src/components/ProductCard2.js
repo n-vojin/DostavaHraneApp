@@ -1,0 +1,95 @@
+import React from 'react';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {Icon} from '@rneui/base';
+
+import {colors} from '../global/styles';
+
+const ProductCard = ({productName, price, image}) => {
+  return (
+    <View style={styles.view1}>
+      <View style={styles.view4}>
+        <Image style={styles.image} source={{uri: image}} />
+      </View>
+      <View style={{width: '74%', justifyContent: 'space-between'}}>
+        <View style={styles.view2}>
+          <Text style={styles.text1}>{productName}</Text>
+          <Text style={styles.text2}>RSD {price}.00</Text>
+        </View>
+        <View style={styles.view3}>
+          <TouchableOpacity
+            onPress={() => {
+              //Oduzeti broj
+            }}
+            style={styles.addDugme}>
+            <Icon
+              type="material"
+              name="remove"
+              size={30}
+              color={colors.SECONDARY_GREEN}
+            />
+          </TouchableOpacity>
+          <Text style={[styles.text1, {marginHorizontal: 12}]}>0</Text>
+
+          <TouchableOpacity
+            onPress={() => {
+              //Dodati broj
+            }}
+            style={styles.addDugme}>
+            <Icon
+              type="material"
+              name="add"
+              size={30}
+              color={colors.SECONDARY_GREEN}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+export default ProductCard;
+
+const styles = StyleSheet.create({
+  view1: {
+    paddingVertical: 10,
+    marginHorizontal: 13,
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderColor: colors.gray4,
+  },
+
+  view2: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingRight: 5,
+  },
+
+  view3: {
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  text1: {
+    fontSize: 17,
+    color: colors.gray1,
+  },
+  text2: {
+    fontSize: 17,
+    fontWeight: '500',
+    color: colors.gray1,
+  },
+
+  view4: {height: 85, width: 95},
+  image: {height: 75, width: 75, borderRadius: 3},
+  addDugme: {
+    backgroundColor: colors.DEFAULT_YELLOW,
+    height: 36,
+    width: 36,
+    borderRadius: 18,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
