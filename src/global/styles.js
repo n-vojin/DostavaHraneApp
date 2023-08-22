@@ -5,6 +5,7 @@ export const colors = {
   SECONDARY_GREEN: '#13C4A3',
   DEFAULT_BLUE: '#0A2433',
   GHOST_WHITE: '#F2F2F8',
+  CANCEL_BUTTON_RED: '#e03528',
 
   black: 'black',
   white: 'white',

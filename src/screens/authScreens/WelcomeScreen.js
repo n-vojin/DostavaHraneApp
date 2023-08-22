@@ -10,6 +10,7 @@ import {
 } from '../../global/styles';
 
 import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 export default function WelcomeScreen({navigation}) {
   //  useEffect(() => {

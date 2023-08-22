@@ -189,7 +189,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  icon2: {fontSize: 24, padding: 5, color: colors.gray3},
+  icon2: {
+    fontSize: 24,
+    padding: 5,
+    color: colors.gray3,
+  },
   modal: {
     flex: 1,
   },
