@@ -1,12 +1,39 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, Dimensions} from 'react-native';
 import HeaderHomeScreen from '../components/HeaderHomeScreen';
+import DeliveryCard from '../components/DeliveryCard';
+
+const imaPorudzbina = true; //TODO Izmeniti dodati (DynamicData)
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function MyOrderScreen({navigation}) {
   return (
-    <View>
+    <View style={{alignItems: 'center'}}>
       <HeaderHomeScreen iconLeft="menu" navigation={navigation} />
-      <Text>MyOrderScreen</Text>
+
+      {imaPorudzbina ? (
+        <ScrollView
+          // !!!! TREBA DA BUDE FLATLISTA U FINALNOJ VERZIJI
+          contentContainerStyle={{
+            width: SCREEN_WIDTH,
+            alignItems: 'center',
+          }}>
+          <DeliveryCard />
+          <DeliveryCard />
+          <DeliveryCard />
+          <DeliveryCard />
+        </ScrollView>
+      ) : (
+        <Text style={{marginTop: '80%'}}>Trenutno nemate porudzbina!</Text>
+      )}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+  },
+});

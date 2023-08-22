@@ -2,7 +2,6 @@ import {StyleSheet, Text, View, ScrollView, Dimensions} from 'react-native';
 import React from 'react';
 import HeaderHomeScreen from '../components/HeaderHomeScreen';
 import CartCard from '../components/CartCard';
-import SectionDividerTitle from '../components/SectionDividerTitle';
 import Header from '../components/Header';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;

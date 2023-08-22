@@ -1,4 +1,11 @@
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Alert,
+  Vibration,
+} from 'react-native';
 import React from 'react';
 import {colors} from '../global/styles';
 import {TouchableOpacity} from 'react-native';
@@ -10,6 +17,51 @@ const priceTotal = 1250;
 const orderContent = '2x Burger, 3x Murger, 4x Gurger, 2x Cola';
 const restaurantName = 'McDonalds';
 
+const handleDeletePress = () => {
+  Vibration.vibrate(80);
+  Alert.alert(
+    'Podvrdite brisanje',
+    'Da li želite da obrišete narudžbinu iz korpe?',
+    [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Delete',
+        onPress: () => {
+          //TODO Perform delete action here (obrisi u cartu)
+          console.log('Item deleted');
+        },
+        style: 'destructive',
+      },
+    ],
+    {cancelable: true},
+  );
+};
+
+const handleProceedPress = () => {
+  Alert.alert(
+    'Podvrdite akicju',
+    'Da li želite da završite porudžbinu?',
+    [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Nastavi',
+        onPress: () => {
+          //TODO Perform ADD action here (IDI NA CHECKOUT)
+          console.log('Idi na checkout');
+        },
+        style: 'destructive',
+      },
+    ],
+    {cancelable: true},
+  );
+};
+
 export default function CartCard({}) {
   return (
     <View style={styles.containerCartCard}>
@@ -18,9 +70,7 @@ export default function CartCard({}) {
         <Button
           buttonStyle={styles.cancelButton}
           style={styles.cancelButton}
-          onPress={() => {
-            // TODO POP UP DA LI STE SIGURNI DA ZELITE DA OBRISETE!!!
-          }}>
+          onLongPress={handleDeletePress}>
           <Icon
             type="material"
             name="remove-circle-outline"
@@ -49,9 +99,7 @@ export default function CartCard({}) {
           <Button
             buttonStyle={styles.confirmButton}
             style={styles.confirmButton}
-            onPress={() => {
-              // TODO PREBACI GA NA CONFIRM ORDER SCREEN!!!
-            }}>
+            onPress={handleProceedPress}>
             <Icon
               type="material"
               name="check-circle-outline"
