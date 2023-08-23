@@ -16,13 +16,16 @@ import firestore from '@react-native-firebase/firestore';
 
 import {productData1} from '../global/Data'; //! za brisati
 import ProductCard2 from '../components/ProductCard2'; //! za brisati
+import {dollarSign} from '../functions';
 
 const priceAdd = 1000; //TODO za IZMENITI (Dynamic Data)
-const pricey = '$$$';
+const pricey = 3;
+const priceyDollarsign = dollarSign(pricey);
+
 const deliveryPrice = 0;
 const restaurantName = 'McDonalds';
 
-export default function RestaurantScreen({restaurantId}) {
+export default function RestaurantScreen({}) {
   const imageUrl =
     'https://s7d1.scene7.com/is/image/mcdonalds/HQ%20Global%20Menu%207%20Release%20-%20Thumbnail%20-%20700x400:hero-desktop?resmode=sharp2';
 
@@ -80,7 +83,7 @@ export default function RestaurantScreen({restaurantId}) {
         <View style={styles.detailView}>
           <View style={styles.titleView}>
             <View style={styles.view50}>
-              <Text style={styles.dollarSign}>{pricey}</Text>
+              <Text style={styles.dollarSign}>{priceyDollarsign}</Text>
             </View>
 
             <Text style={styles.restaurantTitle}>{restaurantData.name}</Text>
@@ -181,7 +184,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   dollarSign: {
-    fontSize: 19,
+    fontSize: 17,
     fontWeight: '400',
     color: colors.SECONDARY_GREEN,
   },

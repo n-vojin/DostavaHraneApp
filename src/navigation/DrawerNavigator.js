@@ -6,6 +6,7 @@ import {Icon} from '@rneui/base';
 import {colors} from '../global/styles';
 import DrawerContent from '../components/DrawerContent';
 import CartScreen from '../screens/CartScreen';
+import MyAccountScreen from '../screens/MyAccountScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -48,6 +49,27 @@ export default function DrawerNavigator() {
             <Icon
               type="material-comunity"
               name="shopping-cart"
+              color={focussed ? colors.DEFAULT_YELLOW : colors.gray3}
+              size={size}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="MyAccountScreen"
+        component={MyAccountScreen}
+        options={{
+          title: 'Moj nalog',
+          headerShown: false,
+          drawerStyle: {
+            borderBottomRightRadius: 40,
+            borderTopRightRadius: 60,
+            marginTop: -4,
+          },
+          drawerIcon: ({focussed, size}) => (
+            <Icon
+              type="material"
+              name="person"
               color={focussed ? colors.DEFAULT_YELLOW : colors.gray3}
               size={size}
             />

@@ -2,7 +2,6 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Icon} from '@rneui/base';
 import HomeScreen from '../screens/HomeScreen';
-import MyAccountScreen from '../screens/MyAccountScreen';
 import MyOrderScreen from '../screens/MyOrdersScreen';
 import SearchScreen from '../screens/SearchScreen';
 import {colors} from '../global/styles';
@@ -56,17 +55,6 @@ export default function RootClientTabs() {
               color={color}
               size={30}
             />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="MyAccountScreen"
-        component={MyAccountScreen}
-        options={{
-          headerShown: false,
-          tabBarLabel: 'Account',
-          tabBarIcon: ({color, size}) => (
-            <Icon name="person" type="material" color={color} size={28} />
           ),
         }}
       />
