@@ -23,7 +23,7 @@ export default function RestaurantScreen({restaurantScreenId}) {
 
   const [restaurantData, setRestaurantData] = useState([]);
 
-  const [priceTotal, setpriceTotal] = useState(0);
+  const [currentBill, setCurrentBill] = useState([]);
 
   useEffect(() => {
     try {
@@ -43,7 +43,7 @@ export default function RestaurantScreen({restaurantScreenId}) {
 
   return (
     <>
-      {priceTotal > 0 && (
+      {currentBill > 0 && (
         <View style={styles.buttonContainer}>
           <Button buttonStyle={styles.cartButton} style={styles.cartButton}>
             <Text style={styles.buttonText}>Pogledaj korpu</Text>
@@ -95,6 +95,7 @@ export default function RestaurantScreen({restaurantScreenId}) {
               )}
             </View>
           </View>
+
           <FlatList
             scrollEnabled={false}
             style={{width: '100%'}}
@@ -104,6 +105,8 @@ export default function RestaurantScreen({restaurantScreenId}) {
                 image={item.image}
                 productName={item.name}
                 price={item.price}
+                setCurrentBill={setCurrentBill}
+                currentBill={currentBill}
               />
             )}
             horizontal={false}

@@ -4,7 +4,13 @@ import {Icon} from '@rneui/base';
 
 import {colors} from '../global/styles';
 
-const ProductCard = ({productName, price, image}) => {
+const ProductCard = ({
+  productName,
+  price,
+  image,
+  setCurrentBill,
+  currentBill,
+}) => {
   const [quantity, setQuantity] = useState(0);
   const [priceAdd, setpriceAdd] = useState(0);
 
