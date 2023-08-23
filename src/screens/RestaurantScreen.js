@@ -43,18 +43,22 @@ export default function RestaurantScreen({restaurantScreenId}) {
 
   //console.log(currentBill.filter(el => el.name === 'Cezar salata').length);
 
+  const addedItemsPrice = currentBill?.reduce((acc, cur) => {
+    return acc + Number(cur.price);
+  }, 0);
+
   return (
     <>
       {currentBill.length > 0 && (
         <View style={styles.buttonContainer}>
-          <Button buttonStyle={styles.cartButton} style={styles.cartButton}>
-            <Text style={styles.buttonText}>Pogledaj korpu</Text>
-            <Text style={styles.buttonText}>
-              {currentBill?.reduce((acc, cur) => {
-                return acc + Number(cur.price);
-              }, 0)}
-              RSD
-            </Text>
+          <Button
+            buttonStyle={styles.cartButton}
+            style={styles.cartButton}
+            onPress={() => {
+              //TODO DODAJ U KORPU
+            }}>
+            <Text style={styles.buttonText}>Dodaj u korpu</Text>
+            <Text style={styles.buttonText}>{addedItemsPrice} RSD</Text>
           </Button>
         </View>
       )}
@@ -69,7 +73,7 @@ export default function RestaurantScreen({restaurantScreenId}) {
           <ImageBackground
             style={styles.bacgroundImage}
             source={{
-              uri: restaurantData.image,
+              uri: restaurantData?.image,
             }}
             resizeMode="contain"
           />
