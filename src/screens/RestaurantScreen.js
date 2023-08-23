@@ -37,17 +37,24 @@ export default function RestaurantScreen({restaurantScreenId}) {
     }
   }, []);
 
-  console.log(restaurantScreenId);
+  console.log(currentBill);
 
   const priceyDollarsign = dollarSign(restaurantData.pricey);
 
+  //console.log(currentBill.filter(el => el.name === 'Cezar salata').length);
+
   return (
     <>
-      {currentBill > 0 && (
+      {currentBill.length > 0 && (
         <View style={styles.buttonContainer}>
           <Button buttonStyle={styles.cartButton} style={styles.cartButton}>
             <Text style={styles.buttonText}>Pogledaj korpu</Text>
-            <Text style={styles.buttonText}>{priceAdd}RSD</Text>
+            <Text style={styles.buttonText}>
+              {currentBill?.reduce((acc, cur) => {
+                return acc + Number(cur.price);
+              }, 0)}
+              RSD
+            </Text>
           </Button>
         </View>
       )}

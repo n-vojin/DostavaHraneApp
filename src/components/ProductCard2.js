@@ -12,19 +12,25 @@ const ProductCard = ({
   currentBill,
 }) => {
   const [quantity, setQuantity] = useState(0);
-  const [priceAdd, setpriceAdd] = useState(0);
 
   const decrement = useCallback(() => {
     if (quantity > 0) {
       setQuantity(quantity - 1);
-      setpriceAdd(priceAdd - price);
+      const indexToRemove = currentBill.findIndex(
+        obj => obj.name === productName,
+      );
+      if (indexToRemove !== -1) {
+        const updatedData = [...currentBill];
+        updatedData.splice(indexToRemove, 1);
+        setCurrentBill(updatedData);
+      }
     }
-  }, [quantity]);
+  }, [quantity, currentBill]);
 
   const increment = useCallback(() => {
     setQuantity(quantity + 1);
-    setpriceAdd(priceAdd + parseInt(price, 10)); //? dodaje na cenu !  ??Kako da ga vratimo na predhodni ekran???
-  }, [quantity]);
+    setCurrentBill(pavlaka => [...pavlaka, {name: productName, price: price}]);
+  }, [quantity, currentBill]);
 
   return (
     <View style={styles.view1}>
