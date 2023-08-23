@@ -25,6 +25,24 @@ const priceyDollarsign = dollarSign(pricey);
 const deliveryPrice = 0;
 const restaurantName = 'McDonalds';
 
+function dollarSigns(num) {
+  if (num <= 0) {
+    return 'Invalid input';
+  } else if (num <= 1) {
+    return '$';
+  } else if (num <= 2) {
+    return '$$';
+  } else if (num <= 3) {
+    return '$$$';
+  } else if (num <= 4) {
+    return '$$$$';
+  } else if (num <= 5) {
+    return '$$$$$';
+  } else {
+    return 'Invalid input >5';
+  }
+}
+
 export default function RestaurantScreen({}) {
   const imageUrl =
     'https://s7d1.scene7.com/is/image/mcdonalds/HQ%20Global%20Menu%207%20Release%20-%20Thumbnail%20-%20700x400:hero-desktop?resmode=sharp2';
