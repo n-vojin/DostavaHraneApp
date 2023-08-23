@@ -5,7 +5,7 @@ export const colors = {
   SECONDARY_GREEN: '#13C4A3',
   DEFAULT_BLUE: '#0A2433',
   GHOST_WHITE: '#F2F2F8',
-  CANCEL_BUTTON_RED: '#e03528',
+  CANCEL_BUTTON_RED: '#f04f4f',
 
   black: 'black',
   white: 'white',
@@ -107,7 +107,7 @@ export const passwordContainer = {
   marginTop: 8,
   marginBottom: 20,
   paddingLeft: 10,
-  paddingRight: 15,
+  paddingRight: 5,
 };
 
 export const badgeStyle = {

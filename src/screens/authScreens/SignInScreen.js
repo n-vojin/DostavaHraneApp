@@ -44,6 +44,12 @@ const SignInScreen = ({navigation}) => {
             <TouchableOpacity
               onPress={() => {
                 setShowPassword(!showPassword);
+              }}
+              style={{
+                width: 40,
+                height: 40,
+                alignItems: 'center',
+                justifyContent: 'center',
               }}>
               <Icon
                 name={showPassword ? 'eye-slash' : 'eye'}
