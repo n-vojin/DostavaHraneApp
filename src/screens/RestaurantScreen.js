@@ -7,11 +7,12 @@ import {
   StatusBar,
   FlatList,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {Button, Icon} from '@rneui/base';
 import {colors} from '../global/styles';
 import {useNavigation} from '@react-navigation/native';
+import firestore from '@react-native-firebase/firestore';
 
 import {productData1} from '../global/Data'; //! za brisati
 import ProductCard2 from '../components/ProductCard2'; //! za brisati
@@ -21,11 +22,26 @@ const pricey = '$$$';
 const deliveryPrice = 0;
 const restaurantName = 'McDonalds';
 
-export default function RestaurantScreen({}) {
+export default function RestaurantScreen({restaurantId}) {
   const imageUrl =
     'https://s7d1.scene7.com/is/image/mcdonalds/HQ%20Global%20Menu%207%20Release%20-%20Thumbnail%20-%20700x400:hero-desktop?resmode=sharp2';
 
   const navigation = useNavigation();
+
+  const [restaurantData, setRestaurantData] = useState([]);
+
+  useEffect(() => {
+    try {
+      const resData = firestore()
+        .collection('restaurant')
+        .doc(restaurantId)
+        .get()
+        .then(p => setRestaurantData(p.data()));
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   return (
     <>
       <View style={styles.buttonContainer}>
@@ -67,7 +83,7 @@ export default function RestaurantScreen({}) {
               <Text style={styles.dollarSign}>{pricey}</Text>
             </View>
 
-            <Text style={styles.restaurantTitle}>{restaurantName}</Text>
+            <Text style={styles.restaurantTitle}>{restaurantData.name}</Text>
             <View style={styles.view50}>
               <Icon type={'material-comunity'} name="moped" size={23} />
               {deliveryPrice === 0 ? (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -14,11 +14,32 @@ import FoodCard from '../components/FoodCard';
 import {restaurantsData, filterData} from '../global/Data';
 import CategoryCard from '../components/CategoryCard';
 import {Icon} from '@rneui/base';
+import firestore from '@react-native-firebase/firestore';
 
 const dummyUrl =
   'https://media-cldnry.s-nbcnews.com/image/upload/newscms/2021_34/1765652/squareat-inline-01-khu-210825.jpg';
 
 export default function HomeScreen({navigation}) {
+  const [restaurants, setRestaurants] = useState([]);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    try {
+      const unsubscribe = firestore()
+        .collection('restaurant')
+        .onSnapshot(doc => {
+          setRestaurants([]);
+          setCount(doc.docs.length);
+          doc.forEach(async d => {
+            await setRestaurants(rest => [...rest, d.data()]);
+          });
+        });
+      return () => unsubscribe();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   return (
     <View style={{backgroundColor: colors.GHOST_WHITE, height: '100%'}}>
       <HeaderHomeScreen iconLeft="menu" navigation={navigation} />
@@ -64,6 +85,7 @@ export default function HomeScreen({navigation}) {
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => (
             <FoodCard
+              // TODO ubaciti restaurant ID
               images={item.images}
               restaurantName={item.restaurantName}
               farAway={item.farAway}

@@ -22,6 +22,7 @@ export default function FoodCard({
     <TouchableOpacity
       style={{marginBottom: 30}}
       onPress={() => {
+        // TODO proslediti RestaurantScreen ID
         navigation.navigate('RestaurantScreen');
       }}>
       <View style={{...styles.cardView, width: 255}}>
