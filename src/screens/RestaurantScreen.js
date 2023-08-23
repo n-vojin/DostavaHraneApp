@@ -17,9 +17,29 @@ import {productData1} from '../global/Data'; //! za brisati
 import ProductCard2 from '../components/ProductCard2'; //! za brisati
 
 const priceAdd = 1000; //TODO za IZMENITI (Dynamic Data)
-const pricey = '$$$';
+const pricey = 3;
+const priceyDollarsign = dollarSigns(pricey);
+
 const deliveryPrice = 0;
 const restaurantName = 'McDonalds';
+
+function dollarSigns(num) {
+  if (num <= 0) {
+    return 'Invalid input';
+  } else if (num <= 1) {
+    return '$';
+  } else if (num <= 2) {
+    return '$$';
+  } else if (num <= 3) {
+    return '$$$';
+  } else if (num <= 4) {
+    return '$$$$';
+  } else if (num <= 5) {
+    return '$$$$$';
+  } else {
+    return 'Invalid input >5';
+  }
+}
 
 export default function RestaurantScreen({}) {
   const imageUrl =
@@ -64,7 +84,7 @@ export default function RestaurantScreen({}) {
         <View style={styles.detailView}>
           <View style={styles.titleView}>
             <View style={styles.view50}>
-              <Text style={styles.dollarSign}>{pricey}</Text>
+              <Text style={styles.dollarSign}>{priceyDollarsign}</Text>
             </View>
 
             <Text style={styles.restaurantTitle}>{restaurantName}</Text>
@@ -165,7 +185,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   dollarSign: {
-    fontSize: 19,
+    fontSize: 17,
     fontWeight: '400',
     color: colors.SECONDARY_GREEN,
   },
