@@ -18,26 +18,18 @@ import {productData1} from '../global/Data'; //! za brisati
 import ProductCard2 from '../components/ProductCard2'; //! za brisati
 import {dollarSign} from '../functions';
 
-const priceAdd = 1000; //TODO za IZMENITI (Dynamic Data)
-const pricey = 3;
-const priceyDollarsign = dollarSign(pricey);
-
-const deliveryPrice = 0;
-const restaurantName = 'McDonalds';
-
-export default function RestaurantScreen({}) {
-  const imageUrl =
-    'https://s7d1.scene7.com/is/image/mcdonalds/HQ%20Global%20Menu%207%20Release%20-%20Thumbnail%20-%20700x400:hero-desktop?resmode=sharp2';
-
+export default function RestaurantScreen({restaurantScreenId}) {
   const navigation = useNavigation();
 
   const [restaurantData, setRestaurantData] = useState([]);
+
+  const [priceTotal, setpriceTotal] = useState(0);
 
   useEffect(() => {
     try {
       const resData = firestore()
         .collection('restaurant')
-        .doc(restaurantId)
+        .doc('121O5UM8Frd6BKfQUBY3')
         .get()
         .then(p => setRestaurantData(p.data()));
     } catch (error) {
@@ -45,16 +37,21 @@ export default function RestaurantScreen({}) {
     }
   }, []);
 
-  console.log(restaurantData);
+  console.log(restaurantScreenId);
+
+  const priceyDollarsign = dollarSign(restaurantData.pricey);
 
   return (
     <>
-      <View style={styles.buttonContainer}>
-        <Button buttonStyle={styles.cartButton} style={styles.cartButton}>
-          <Text style={styles.buttonText}>Pogledaj korpu</Text>
-          <Text style={styles.buttonText}>{priceAdd}RSD</Text>
-        </Button>
-      </View>
+      {priceTotal > 0 && (
+        <View style={styles.buttonContainer}>
+          <Button buttonStyle={styles.cartButton} style={styles.cartButton}>
+            <Text style={styles.buttonText}>Pogledaj korpu</Text>
+            <Text style={styles.buttonText}>{priceAdd}RSD</Text>
+          </Button>
+        </View>
+      )}
+
       <ScrollView style={{flex: 1}}>
         <StatusBar
           barStyle={'light-content'}
@@ -65,7 +62,7 @@ export default function RestaurantScreen({}) {
           <ImageBackground
             style={styles.bacgroundImage}
             source={{
-              uri: imageUrl,
+              uri: restaurantData.image,
             }}
             resizeMode="contain"
           />
@@ -91,18 +88,17 @@ export default function RestaurantScreen({}) {
             <Text style={styles.restaurantTitle}>{restaurantData.name}</Text>
             <View style={styles.view50}>
               <Icon type={'material-comunity'} name="moped" size={23} />
-              {deliveryPrice === 0 ? (
+              {restaurantData.deliveryFee === 0 ? (
                 <Text>Free</Text>
               ) : (
-                <Text>{deliveryPrice} din</Text>
+                <Text>{restaurantData.deliveryFee} din</Text>
               )}
             </View>
           </View>
           <FlatList
             scrollEnabled={false}
             style={{width: '100%'}}
-            data={productData1}
-            keyExtractor={(item, index) => index.toString()}
+            data={restaurantData.menu}
             renderItem={({item, index}) => (
               <ProductCard2
                 image={item.image}

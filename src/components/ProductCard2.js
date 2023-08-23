@@ -6,13 +6,18 @@ import {colors} from '../global/styles';
 
 const ProductCard = ({productName, price, image}) => {
   const [quantity, setQuantity] = useState(0);
+  const [priceAdd, setpriceAdd] = useState(0);
 
   const decrement = useCallback(() => {
-    if (quantity > 0) setQuantity(quantity - 1);
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+      setpriceAdd(priceAdd - price);
+    }
   }, [quantity]);
 
   const increment = useCallback(() => {
     setQuantity(quantity + 1);
+    setpriceAdd(priceAdd + parseInt(price, 10)); //? dodaje na cenu !  ??Kako da ga vratimo na predhodni ekran???
   }, [quantity]);
 
   return (

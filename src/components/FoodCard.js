@@ -5,25 +5,22 @@ import {colors, parameters} from '../global/styles';
 import {useNavigation} from '@react-navigation/native';
 
 export default function FoodCard({
-  OnPressFoodCard,
+  restaurantId,
   restaurantName,
-  deliveryAvailable,
-  discountAvailable,
-  discountPercent,
-  numberOfReview,
   businessAddress,
   farAway,
   averageReview,
   images,
-  screenWidth,
 }) {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
       style={{marginBottom: 30}}
       onPress={() => {
-        // TODO proslediti RestaurantScreen ID
-        navigation.navigate('RestaurantScreen');
+        // TODO proslediti RestaurantScreen ID   NE RADI???????????????
+        navigation.navigate('RestaurantScreen', {
+          restaurantScreenId: restaurantId,
+        });
       }}>
       <View style={{...styles.cardView, width: 255}}>
         <Image style={{...styles.image, width: 255}} source={{uri: images}} />

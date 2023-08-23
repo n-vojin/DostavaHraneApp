@@ -80,18 +80,17 @@ export default function HomeScreen({navigation}) {
             paddingRight: 10,
           }}
           horizontal={true}
-          data={restaurantsData}
+          data={restaurants}
           keyExtractor={(item, index) => index.toString()}
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => (
             <FoodCard
-              // TODO ubaciti restaurant ID
-              images={item.images}
-              restaurantName={item.restaurantName}
+              restaurantId={item.id}
+              images={item.image}
+              restaurantName={item.name}
               farAway={item.farAway}
-              businessAddress={item.businessAddress}
-              averageReview={item.averageReview}
-              numberOfReview={item.numberOfReview}
+              businessAddress={item.adress}
+              averageReview={item.review}
             />
           )}
         />
@@ -107,17 +106,17 @@ export default function HomeScreen({navigation}) {
             paddingRight: 10,
           }}
           horizontal={true}
-          data={restaurantsData}
+          data={restaurants}
           keyExtractor={(item, index) => index.toString()}
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => (
             <FoodCard
-              images={item.images}
-              restaurantName={item.restaurantName}
+              // TODO ubaciti restaurant ID
+              images={item.image}
+              restaurantName={item.name}
               farAway={item.farAway}
-              businessAddress={item.businessAddress}
-              averageReview={item.averageReview}
-              numberOfReview={item.numberOfReview}
+              businessAddress={item.adress}
+              averageReview={item.review}
             />
           )}
         />
@@ -133,17 +132,17 @@ export default function HomeScreen({navigation}) {
             paddingRight: 10,
           }}
           horizontal={true}
-          data={restaurantsData}
+          data={restaurants}
           keyExtractor={(item, index) => index.toString()}
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => (
             <FoodCard
-              images={item.images}
-              restaurantName={item.restaurantName}
+              // TODO ubaciti restaurant ID
+              images={item.image}
+              restaurantName={item.name}
               farAway={item.farAway}
-              businessAddress={item.businessAddress}
-              averageReview={item.averageReview}
-              numberOfReview={item.numberOfReview}
+              businessAddress={item.adress}
+              averageReview={item.review}
             />
           )}
         />
@@ -152,7 +151,8 @@ export default function HomeScreen({navigation}) {
         <TouchableOpacity
           style={{justifyContent: 'center', alignItems: 'center'}}
           onPress={() => {
-            navigation.navigate('RestaurantsMapScreen');
+            //navigation.navigate('RestaurantsMapScreen');
+            console.log(restaurants);
           }}>
           <Icon
             name="place"
