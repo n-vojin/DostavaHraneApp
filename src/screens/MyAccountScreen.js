@@ -8,6 +8,7 @@ import {
   Alert,
 } from 'react-native';
 import HeaderHomeScreen from '../components/HeaderHomeScreen';
+import Header from '../components/Header';
 import {
   colors,
   naslov,
@@ -57,7 +58,11 @@ export default function MyAccountScreen({navigation}) {
 
   return (
     <View>
-      <HeaderHomeScreen iconLeft="menu" navigation={navigation} />
+      <Header
+        iconLeft={'arrow-left'}
+        title={'Moj nalog'}
+        navigation={navigation}
+      />
       <View style={styles.view1}>
         <Avatar
           rounded
