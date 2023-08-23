@@ -1,10 +1,20 @@
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {Icon} from '@rneui/base';
 
 import {colors} from '../global/styles';
 
 const ProductCard = ({productName, price, image}) => {
+  const [quantity, setQuantity] = useState(0);
+
+  const decrement = useCallback(() => {
+    if (quantity > 0) setQuantity(quantity - 1);
+  }, [quantity]);
+
+  const increment = useCallback(() => {
+    setQuantity(quantity + 1);
+  }, [quantity]);
+
   return (
     <View style={styles.view1}>
       <View style={styles.view4}>
@@ -16,11 +26,7 @@ const ProductCard = ({productName, price, image}) => {
           <Text style={styles.text2}>RSD {price}.00</Text>
         </View>
         <View style={styles.view3}>
-          <TouchableOpacity
-            onPress={() => {
-              //Oduzeti broj
-            }}
-            style={styles.addDugme}>
+          <TouchableOpacity onPress={decrement} style={styles.addDugme}>
             <Icon
               type="material"
               name="remove"
@@ -28,13 +34,9 @@ const ProductCard = ({productName, price, image}) => {
               color={colors.SECONDARY_GREEN}
             />
           </TouchableOpacity>
-          <Text style={[styles.text1, {marginHorizontal: 12}]}>0</Text>
+          <Text style={[styles.text1, {marginHorizontal: 12}]}>{quantity}</Text>
 
-          <TouchableOpacity
-            onPress={() => {
-              //Dodati broj
-            }}
-            style={styles.addDugme}>
+          <TouchableOpacity onPress={increment} style={styles.addDugme}>
             <Icon
               type="material"
               name="add"
