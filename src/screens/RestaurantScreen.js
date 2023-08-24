@@ -14,8 +14,7 @@ import {colors} from '../global/styles';
 import {useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 
-import {productData1} from '../global/Data'; //! za brisati
-import ProductCard2 from '../components/ProductCard2'; //! za brisati
+import ProductCard2 from '../components/ProductCard2';
 import {dollarSign} from '../functions';
 
 export default function RestaurantScreen({route}) {

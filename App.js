@@ -6,7 +6,7 @@ import RestaurantScreen from './src/screens/RestaurantScreen';
 import CheckOutScreen from './src/screens/CheckOutScreen';
 
 export default function App() {
-  //return <RootNavigator />;
+  return <RootNavigator />;
   return <CheckOutScreen />;
 }
 

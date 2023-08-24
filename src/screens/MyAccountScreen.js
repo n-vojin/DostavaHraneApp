@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -15,18 +15,31 @@ import {
   yellowButton,
   yellowButtonText,
   textInput,
-  passwordInput,
-  passwordContainer,
 } from '../global/styles';
 import {Avatar, Button} from '@rneui/base';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import firestore from '@react-native-firebase/firestore';
 
 const userName = 'Nemanja';
 const userSurname = 'Vojinovic';
-const userNameSurname = userName + ' ' + userSurname;
-const userCurrentAdress = 'Proleterska 28, Radicevic';
 
 export default function MyAccountScreen({navigation}) {
+  const [userData, seUserData] = useState([]);
+  const userNameSurname = userData.firstName + ' ' + userData.lastName;
+  const userCurrentAdress = 'Proleterska 28, Radicevic';
+
+  useEffect(() => {
+    try {
+      const resData = firestore()
+        .collection('user')
+        .doc('EfF0YfTYVhmJRJ7JsVCs')
+        .get()
+        .then(p => seUserData(p.data()));
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   const [editAccount, setEditAccount] = useState(false);
 
   const handleIzmenaPress = () => {
@@ -73,7 +86,7 @@ export default function MyAccountScreen({navigation}) {
         <View style={styles.view2}>
           <Text style={styles.userCardText2}>Hello!</Text>
           <Text style={styles.userCardText}>{userNameSurname}</Text>
-          <Text style={[styles.userCardText3]}>{userEmail}</Text>
+          <Text style={[styles.userCardText3]}>{userData.email}</Text>
           <Text
             style={styles.userCardTextUnderline}
             onPress={() => {
@@ -91,18 +104,18 @@ export default function MyAccountScreen({navigation}) {
             </Text>
             <TextInput
               style={{...textInput, marginBottom: 10}}
-              value={userName}
+              value={userData.firstName}
             />
             <TextInput
               style={{...textInput, marginBottom: 10}}
-              value={userSurname}
+              value={userData.lastName}
             />
             <TextInput
               style={{...textInput, marginBottom: 10}}
-              value={userCurrentAdress}
+              value={userData.location}
             />
 
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row', marginTop: 20}}>
               <TouchableOpacity
                 style={{
                   ...yellowButton,
@@ -155,7 +168,7 @@ const styles = StyleSheet.create({
   },
   userCardText3: {
     color: colors.DEFAULT_BLUE,
-    fontSize: 17,
+    fontSize: 15,
     fontWeight: '300',
   },
 
