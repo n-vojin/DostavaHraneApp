@@ -11,6 +11,7 @@ export default function RestaurantCard({
   farAway,
   averageReview,
   images,
+  cardWidth,
 }) {
   const navigation = useNavigation();
 
@@ -23,8 +24,11 @@ export default function RestaurantCard({
           restaurantId: restaurantId,
         });
       }}>
-      <View style={{...styles.cardView, width: 255}}>
-        <Image style={{...styles.image, width: 255}} source={{uri: images}} />
+      <View style={{...styles.cardView, width: cardWidth}}>
+        <Image
+          style={{...styles.image, width: cardWidth}}
+          source={{uri: images}}
+        />
 
         <View>
           <View

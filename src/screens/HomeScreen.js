@@ -6,13 +6,13 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import {colors, parameters} from '../global/styles';
 import HeaderHomeScreen from '../components/HeaderHomeScreen';
 import SectionDividerTitle from '../components/SectionDividerTitle';
 import RestaurantCard from '../components/RestaurantCard';
 import {restaurantsData, filterData} from '../global/Data';
-import CategoryCard from '../components/CategoryCard';
 import {Icon} from '@rneui/base';
 import firestore from '@react-native-firebase/firestore';
 
@@ -22,6 +22,12 @@ const dummyUrl =
 export default function HomeScreen({navigation}) {
   const [restaurants, setRestaurants] = useState([]);
   const [count, setCount] = useState(0);
+  const [categorySelected, setCategorySelected] = useState('');
+  const [categoryName, setCategoryName] = useState('');
+
+  const filteredRestaurants = restaurants.filter(item =>
+    item.foodType.includes(categorySelected),
+  );
 
   useEffect(() => {
     try {
@@ -40,19 +46,19 @@ export default function HomeScreen({navigation}) {
     }
   }, []);
 
+  const sortedData = [...restaurants].sort((a, b) => b.review - a.review);
+
+  const popularnoData = [...restaurants].slice(0, 5);
+  const top5Data = sortedData.slice(0, 5);
+  const hotData = [...restaurants].slice(2, 5);
+
   return (
     <View style={{backgroundColor: colors.GHOST_WHITE, height: '100%'}}>
       <HeaderHomeScreen iconLeft="menu" navigation={navigation} />
       <ScrollView showsVerticalScrollIndicator>
         <View style={styles.container}>
-          {/* TODO DOATI FLATLIST */}
           <FlatList
-            style={{
-              width: '100%',
-
-              elevation: 50,
-              marginTop: 5,
-            }}
+            style={styles.categoryContainer}
             contentContainerStyle={{
               paddingHorizontal: 5,
               marginVertical: 12,
@@ -62,13 +68,84 @@ export default function HomeScreen({navigation}) {
             data={filterData}
             keyExtractor={item => item.id}
             renderItem={({item, index}) => (
-              <CategoryCard title={item.name} imageUrl={item.image} />
+              <TouchableOpacity
+                style={styles.imageAndTitleContainer}
+                onPress={() => {
+                  setCategorySelected(item.foodType);
+                  setCategoryName(item.name);
+                }}>
+                <Image
+                  style={styles.image}
+                  resizeMode="cover"
+                  source={item.image}
+                />
+                <Text style={styles.textWhite}>{item.name}</Text>
+              </TouchableOpacity>
             )}
           />
 
-          <SectionDividerTitle title="Vama u blizini" />
+          <SectionDividerTitle
+            title={categoryName !== '' ? categoryName : 'Popularno'}
+          />
         </View>
 
+        <FlatList
+          style={{
+            width: '100%',
+            marginTop: 5,
+            marginHorizontal: 3,
+            marginBottom: -20,
+          }}
+          contentContainerStyle={{
+            paddingHorizontal: 3,
+            paddingRight: 10,
+          }}
+          horizontal={true}
+          data={filteredRestaurants}
+          keyExtractor={item => item.id}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({item}) => (
+            <RestaurantCard
+              restaurantId={item.id}
+              images={item.image}
+              restaurantName={item.name}
+              farAway={item.farAway}
+              businessAddress={item.adress}
+              averageReview={item.review}
+              cardWidth={255}
+            />
+          )}
+        />
+        <SectionDividerTitle title="Najbolje ocenjeno" />
+        <FlatList
+          style={{
+            width: '100%',
+            marginTop: 5,
+            marginHorizontal: 3,
+            marginBottom: -20,
+          }}
+          contentContainerStyle={{
+            paddingHorizontal: 3,
+            paddingRight: 10,
+          }}
+          horizontal={true}
+          data={top5Data}
+          keyExtractor={item => item.id}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({item}) => (
+            <RestaurantCard
+              restaurantId={item.id}
+              images={item.image}
+              restaurantName={item.name}
+              farAway={item.farAway}
+              businessAddress={item.adress}
+              averageReview={item.review}
+              cardWidth={255}
+            />
+          )}
+        />
+
+        <SectionDividerTitle title="HOT!" />
         <FlatList
           style={{
             width: '100%',
@@ -80,7 +157,7 @@ export default function HomeScreen({navigation}) {
             paddingRight: 10,
           }}
           horizontal={true}
-          data={restaurants}
+          data={hotData}
           keyExtractor={item => item.id}
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => (
@@ -91,63 +168,13 @@ export default function HomeScreen({navigation}) {
               farAway={item.farAway}
               businessAddress={item.adress}
               averageReview={item.review}
+              cardWidth={255}
             />
           )}
         />
-        <SectionDividerTitle title="Najpopularnije" />
-        {/* <FlatList
-          style={{
-            width: '100%',
-            marginTop: 5,
-            marginHorizontal: 3,
-          }}
-          contentContainerStyle={{
-            paddingHorizontal: 3,
-            paddingRight: 10,
-          }}
-          horizontal={true}
-          data={restaurants}
-          keyExtractor={(item, index) => index.toString()}
-          showsHorizontalScrollIndicator={false}
-          renderItem={({item}) => (
-            <RestaurantCard
-              // TODO ubaciti restaurant ID
-              images={item.image}
-              restaurantName={item.name}
-              farAway={item.farAway}
-              businessAddress={item.adress}
-              averageReview={item.review}
-            />
-          )}
-        /> */}
-        <SectionDividerTitle title="HOT!" />
-        {/* <FlatList
-          style={{
-            width: '100%',
-            marginTop: 5,
-            marginHorizontal: 3,
-          }}
-          contentContainerStyle={{
-            paddingHorizontal: 3,
-            paddingRight: 10,
-          }}
-          horizontal={true}
-          data={restaurants}
-          keyExtractor={(item, index) => index.toString()}
-          showsHorizontalScrollIndicator={false}
-          renderItem={({item}) => (
-            <RestaurantCard
-              // TODO ubaciti restaurant ID
-              images={item.image}
-              restaurantName={item.name}
-              farAway={item.farAway}
-              businessAddress={item.adress}
-              averageReview={item.review}
-            />
-          )}
-        /> */}
       </ScrollView>
-      <View style={styles.floatingButton}>
+
+      {/* <View style={styles.floatingButton}>
         <TouchableOpacity
           style={{justifyContent: 'center', alignItems: 'center'}}
           onPress={() => {
@@ -171,12 +198,17 @@ export default function HomeScreen({navigation}) {
             Map
           </Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  categoryContainer: {
+    width: '100%',
+    elevation: 50,
+    marginTop: 5,
+  },
   container: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -193,5 +225,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  textWhite: {
+    color: colors.GHOST_WHITE,
+    fontSize: 16,
+    fontWeight: '500',
+    position: 'absolute',
+    marginTop: 64,
+    marginLeft: 7,
+    textShadowRadius: 10,
+    textShadowColor: colors.gray1,
+  },
+  image: {
+    width: 90,
+    height: 90,
+    borderRadius: 8,
+  },
+  imageAndTitleContainer: {
+    marginLeft: 4,
+    marginRight: 5,
   },
 });

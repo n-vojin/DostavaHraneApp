@@ -64,30 +64,43 @@ const ProductCard = ({
       <View style={styles.view4}>
         <Image style={styles.image} source={{uri: image}} />
       </View>
-      <View style={{width: '74%', justifyContent: 'space-between'}}>
-        <View style={styles.view2}>
-          <Text style={styles.text1}>{productName}</Text>
-          <Text style={styles.text2}>RSD {price}.00</Text>
-        </View>
-        <View style={styles.view3}>
-          <TouchableOpacity onPress={decrement} style={styles.addDugme}>
-            <Icon
-              type="material"
-              name="remove"
-              size={30}
-              color={colors.SECONDARY_GREEN}
-            />
-          </TouchableOpacity>
-          <Text style={[styles.text1, {marginHorizontal: 12}]}>{quantity}</Text>
 
-          <TouchableOpacity onPress={increment} style={styles.addDugme}>
-            <Icon
-              type="material"
-              name="add"
-              size={30}
-              color={colors.SECONDARY_GREEN}
-            />
-          </TouchableOpacity>
+      <View
+        style={{
+          width: '74%',
+          justifyContent: 'space-between',
+          flexDirection: 'row',
+        }}>
+        <View style={styles.view2}>
+          <View style={{flex: 1}}>
+            <Text style={styles.text1}>{productName}</Text>
+          </View>
+          <View
+            style={{justifyContent: 'space-between', alignItems: 'flex-end'}}>
+            <Text style={styles.text2}>RSD {price}.00</Text>
+            <View style={styles.view3}>
+              <TouchableOpacity onPress={decrement} style={styles.addDugme}>
+                <Icon
+                  type="material"
+                  name="remove"
+                  size={30}
+                  color={colors.SECONDARY_GREEN}
+                />
+              </TouchableOpacity>
+              <Text style={[styles.text1, {marginHorizontal: 12}]}>
+                {quantity}
+              </Text>
+
+              <TouchableOpacity onPress={increment} style={styles.addDugme}>
+                <Icon
+                  type="material"
+                  name="add"
+                  size={30}
+                  color={colors.SECONDARY_GREEN}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
       </View>
     </View>
@@ -101,6 +114,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginHorizontal: 13,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     borderBottomWidth: 1,
     borderColor: colors.gray4,
   },

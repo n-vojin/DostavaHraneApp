@@ -56,7 +56,11 @@ export default function RestaurantScreen({route}) {
             buttonStyle={styles.cartButton}
             style={styles.cartButton}
             onPress={() => {
-              navigation.navigate('CartScreen');
+              navigation.navigate('CheckOutScreen', {
+                restaurantId: restaurantId,
+                billArray: currentBill,
+                itemsPrice: addedItemsPrice,
+              });
             }}>
             <Text style={styles.buttonText}>Dodaj u korpu</Text>
             <Text style={styles.buttonText}>{addedItemsPrice} RSD</Text>
@@ -188,7 +192,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.SECONDARY_GREEN,
     borderRadius: 38,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     paddingHorizontal: 20,
   },
   buttonText: {

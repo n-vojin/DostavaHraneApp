@@ -12,14 +12,14 @@ import React, {useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {Button, Icon} from '@rneui/base';
 import {colors} from '../global/styles';
-//import {useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 
 import {checkOutData} from '../global/Data'; //! za brisati
 
-export default function CheckOutScreen({restaurantId, billArray, itemsPrice}) {
-  // const navigation = useNavigation();
-
+export default function CheckOutScreen({route}) {
+  const navigation = useNavigation();
+  const {restaurantId, billArray, itemsPrice} = route.params;
   // const {restaurantId} = route.params;
 
   const [restaurantData, setRestaurantData] = useState([]);
@@ -29,7 +29,7 @@ export default function CheckOutScreen({restaurantId, billArray, itemsPrice}) {
     try {
       const resData = firestore()
         .collection('restaurant')
-        .doc('121O5UM8Frd6BKfQUBY3')
+        .doc(restaurantId)
         .get()
         .then(p => setRestaurantData(p.data()));
     } catch (error) {
@@ -44,6 +44,9 @@ export default function CheckOutScreen({restaurantId, billArray, itemsPrice}) {
           buttonStyle={styles.cartButton}
           style={styles.cartButton}
           onPress={() => {
+            //TODO   DODAJ U BAZU PODATAKA ZA ORDERS
+            //TODO   DODAJ U BAZU PODATAKA ZA ORDERS
+            //TODO   DODAJ U BAZU PODATAKA ZA ORDERS
             //TODO   DODAJ U BAZU PODATAKA ZA ORDERS
           }}>
           <Text style={styles.buttonText}>Poruči</Text>
@@ -91,11 +94,13 @@ export default function CheckOutScreen({restaurantId, billArray, itemsPrice}) {
               )}
             </View>
           </View>
+
           <View style={styles.reciept}>
+            <View style={styles.recieptDivider}></View>
             <FlatList
               scrollEnabled={false}
               style={{width: '100%'}}
-              data={checkOutData}
+              data={billArray}
               renderItem={({item, index}) => (
                 <View style={{alignContent: 'flex-start'}}>
                   <Image
@@ -103,7 +108,9 @@ export default function CheckOutScreen({restaurantId, billArray, itemsPrice}) {
                     source={{uri: item.image}}
                   />
                   <View style={styles.recieptBar}>
-                    <Text style={styles.textSemibold}>{item.name}:</Text>
+                    <Text style={[styles.textSemibold, {flex: 10}]}>
+                      {item.name}:
+                    </Text>
                     <View style={{flexDirection: 'row'}}>
                       <Text>{item.quantity} x </Text>
                       <Text> {item.price}.00 RSD</Text>
@@ -155,7 +162,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   detailView: {
-    height: 1000, //TEMPORARY
+    height: '100%', //TEMPORARY
     width: '100%',
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
@@ -253,9 +260,11 @@ const styles = StyleSheet.create({
   },
 
   recieptDivider: {
-    paddingbottom: 10,
+    width: '100%',
     borderBottomWidth: 1.5,
     borderColor: colors.gray3,
+    marginBottom: 0,
+    marginTop: -1,
   },
   productImage: {
     height: 50,
