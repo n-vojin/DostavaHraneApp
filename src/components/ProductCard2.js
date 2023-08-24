@@ -14,23 +14,50 @@ const ProductCard = ({
   const [quantity, setQuantity] = useState(0);
 
   const decrement = useCallback(() => {
-    if (quantity > 0) {
+    if (quantity > 1) {
       setQuantity(quantity - 1);
+      const indexToChange = currentBill.findIndex(
+        obj => obj.name === productName,
+      );
+      if (indexToChange !== -1) {
+        const updatedData = [...currentBill];
+        updatedData.splice(indexToChange, 1, {
+          ...updatedData[indexToChange],
+          quantity: quantity - 1,
+        });
+        setCurrentBill(updatedData);
+      }
+    }
+    if (quantity === 1) {
+      setQuantity(0);
       const indexToRemove = currentBill.findIndex(
         obj => obj.name === productName,
       );
       if (indexToRemove !== -1) {
-        const updatedData = [...currentBill];
-        updatedData.splice(indexToRemove, 1);
-        setCurrentBill(updatedData);
+        let tempData = [...currentBill];
+        tempData.splice(indexToRemove, 1);
+        setCurrentBill(tempData);
       }
     }
   }, [quantity, currentBill]);
 
   const increment = useCallback(() => {
     setQuantity(quantity + 1);
-    setCurrentBill(pavlaka => [...pavlaka, {name: productName, price: price}]);
-  }, [quantity, currentBill]);
+    const indexToAdd = currentBill.findIndex(obj => obj.name === productName);
+    if (indexToAdd !== -1) {
+      const tempData = [...currentBill];
+      tempData.splice(indexToAdd, 1, {
+        ...tempData[indexToAdd],
+        quantity: quantity + 1,
+      });
+      setCurrentBill(tempData);
+    } else {
+      setCurrentBill(pavlaka => [
+        ...pavlaka,
+        {name: productName, price: price, quantity: quantity + 1},
+      ]);
+    }
+  }, [quantity, currentBill, setCurrentBill]);
 
   return (
     <View style={styles.view1}>

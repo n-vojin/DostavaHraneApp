@@ -18,8 +18,10 @@ import {productData1} from '../global/Data'; //! za brisati
 import ProductCard2 from '../components/ProductCard2'; //! za brisati
 import {dollarSign} from '../functions';
 
-export default function RestaurantScreen({restaurantScreenId}) {
+export default function RestaurantScreen({route}) {
   const navigation = useNavigation();
+
+  const {restaurantId} = route.params;
 
   const [restaurantData, setRestaurantData] = useState([]);
 
@@ -29,7 +31,7 @@ export default function RestaurantScreen({restaurantScreenId}) {
     try {
       const resData = firestore()
         .collection('restaurant')
-        .doc('121O5UM8Frd6BKfQUBY3')
+        .doc(restaurantId)
         .get()
         .then(p => setRestaurantData(p.data()));
     } catch (error) {
@@ -37,14 +39,14 @@ export default function RestaurantScreen({restaurantScreenId}) {
     }
   }, []);
 
-  console.log(currentBill);
-
+  console.log('curr', currentBill);
+  console.log('id', restaurantId);
   const priceyDollarsign = dollarSign(restaurantData.pricey);
 
   //console.log(currentBill.filter(el => el.name === 'Cezar salata').length);
 
   const addedItemsPrice = currentBill?.reduce((acc, cur) => {
-    return acc + Number(cur.price);
+    return acc + Number(cur.price) * cur.quantity;
   }, 0);
 
   return (
@@ -55,7 +57,7 @@ export default function RestaurantScreen({restaurantScreenId}) {
             buttonStyle={styles.cartButton}
             style={styles.cartButton}
             onPress={() => {
-              //TODO DODAJ U KORPU
+              navigation.navigate('CartScreen');
             }}>
             <Text style={styles.buttonText}>Dodaj u korpu</Text>
             <Text style={styles.buttonText}>{addedItemsPrice} RSD</Text>

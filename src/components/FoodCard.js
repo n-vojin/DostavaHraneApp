@@ -13,13 +13,14 @@ export default function FoodCard({
   images,
 }) {
   const navigation = useNavigation();
+
   return (
     <TouchableOpacity
       style={{marginBottom: 30}}
       onPress={() => {
         // TODO proslediti RestaurantScreen ID   NE RADI???????????????
         navigation.navigate('RestaurantScreen', {
-          restaurantScreenId: restaurantId,
+          restaurantId: restaurantId,
         });
       }}>
       <View style={{...styles.cardView, width: 255}}>

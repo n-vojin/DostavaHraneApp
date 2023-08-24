@@ -81,7 +81,7 @@ export default function HomeScreen({navigation}) {
           }}
           horizontal={true}
           data={restaurants}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={item => item.id}
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => (
             <FoodCard
@@ -95,7 +95,7 @@ export default function HomeScreen({navigation}) {
           )}
         />
         <SectionDividerTitle title="Najpopularnije" />
-        <FlatList
+        {/* <FlatList
           style={{
             width: '100%',
             marginTop: 5,
@@ -119,9 +119,9 @@ export default function HomeScreen({navigation}) {
               averageReview={item.review}
             />
           )}
-        />
+        /> */}
         <SectionDividerTitle title="HOT!" />
-        <FlatList
+        {/* <FlatList
           style={{
             width: '100%',
             marginTop: 5,
@@ -145,14 +145,14 @@ export default function HomeScreen({navigation}) {
               averageReview={item.review}
             />
           )}
-        />
+        /> */}
       </ScrollView>
       <View style={styles.floatingButton}>
         <TouchableOpacity
           style={{justifyContent: 'center', alignItems: 'center'}}
           onPress={() => {
             //navigation.navigate('RestaurantsMapScreen');
-            console.log(restaurants);
+            console.log('restaurants', restaurants);
           }}>
           <Icon
             name="place"
