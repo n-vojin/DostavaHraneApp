@@ -24,12 +24,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const userName = 'Nemanja';
 const userSurname = 'Vojinovic';
 const userNameSurname = userName + ' ' + userSurname;
-const userEmail = 'nemanja@gmail.com';
+const userCurrentAdress = 'Proleterska 28, Radicevic';
 
 export default function MyAccountScreen({navigation}) {
   const [editAccount, setEditAccount] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showPassword2, setShowPassword2] = useState(false);
 
   const handleIzmenaPress = () => {
     Alert.alert(
@@ -101,55 +99,9 @@ export default function MyAccountScreen({navigation}) {
             />
             <TextInput
               style={{...textInput, marginBottom: 10}}
-              value={userEmail}
+              value={userCurrentAdress}
             />
-            <View style={{...passwordContainer, marginBottom: 10}}>
-              <TextInput //                         Trenutni password
-                style={{...passwordInput}}
-                placeholder="Current Password *Required!" //    TODO DODATI DA SU REQUIRED POLJA ZA UNOS
-                secureTextEntry={!showPassword}
-              />
-              <TouchableOpacity
-                onPress={() => {
-                  setShowPassword(!showPassword);
-                }}
-                style={{
-                  width: 40,
-                  height: 40,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <Icon
-                  name={showPassword ? 'eye-slash' : 'eye'}
-                  size={20}
-                  color={colors.gray3}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={{...passwordContainer}}>
-              <TextInput //                        Novi password
-                style={{...passwordInput}}
-                placeholder="New Password"
-                secureTextEntry={!showPassword2}
-                //              TODO   DODATI AKO JE PRAZAN DA SE NE MENJA PASSWORD
-              />
-              <TouchableOpacity
-                onPress={() => {
-                  setShowPassword2(!showPassword2);
-                }}
-                style={{
-                  width: 40,
-                  height: 40,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <Icon
-                  name={showPassword2 ? 'eye-slash' : 'eye'}
-                  size={20}
-                  color={colors.gray3}
-                />
-              </TouchableOpacity>
-            </View>
+
             <View style={{flexDirection: 'row'}}>
               <TouchableOpacity
                 style={{
