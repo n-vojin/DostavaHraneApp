@@ -10,7 +10,7 @@ import {
 import {colors, parameters} from '../global/styles';
 import HeaderHomeScreen from '../components/HeaderHomeScreen';
 import SectionDividerTitle from '../components/SectionDividerTitle';
-import FoodCard from '../components/FoodCard';
+import RestaurantCard from '../components/RestaurantCard';
 import {restaurantsData, filterData} from '../global/Data';
 import CategoryCard from '../components/CategoryCard';
 import {Icon} from '@rneui/base';
@@ -84,7 +84,7 @@ export default function HomeScreen({navigation}) {
           keyExtractor={item => item.id}
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => (
-            <FoodCard
+            <RestaurantCard
               restaurantId={item.id}
               images={item.image}
               restaurantName={item.name}
@@ -110,7 +110,7 @@ export default function HomeScreen({navigation}) {
           keyExtractor={(item, index) => index.toString()}
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => (
-            <FoodCard
+            <RestaurantCard
               // TODO ubaciti restaurant ID
               images={item.image}
               restaurantName={item.name}
@@ -136,7 +136,7 @@ export default function HomeScreen({navigation}) {
           keyExtractor={(item, index) => index.toString()}
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => (
-            <FoodCard
+            <RestaurantCard
               // TODO ubaciti restaurant ID
               images={item.image}
               restaurantName={item.name}

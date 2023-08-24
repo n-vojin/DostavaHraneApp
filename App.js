@@ -3,9 +3,11 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import RootNavigator from './src/navigation/RootNavigator';
 import RestaurantScreen from './src/screens/RestaurantScreen';
+import CheckOutScreen from './src/screens/CheckOutScreen';
 
 export default function App() {
-  return <RootNavigator />;
+  //return <RootNavigator />;
+  return <CheckOutScreen />;
 }
 
 const styles = StyleSheet.create({

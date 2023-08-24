@@ -11,6 +11,23 @@ export const filterData = [
   {name: 'Desserts', image: require('../assets/desserts.png'), id: '9'},
 ];
 
+export const checkOutData = [
+  {
+    image:
+      'https://fagor.rs/wp-content/uploads/2021/12/recept-za-rusku-salatu.jpg',
+    name: 'Ruska salata',
+    price: 400,
+    quantity: 3,
+  },
+  {
+    image:
+      'https://nadijeti.com/wp-content/uploads/2018/11/cezar-salata-1024x819.jpg',
+    name: 'Cezar salata',
+    price: '450',
+    quantity: 2,
+  },
+];
+
 export const productData1 = [
   {
     name: 'Pomfrit XL',

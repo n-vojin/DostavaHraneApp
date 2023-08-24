@@ -4,7 +4,7 @@ import {Icon} from '@rneui/themed';
 import {colors, parameters} from '../global/styles';
 import {useNavigation} from '@react-navigation/native';
 
-export default function FoodCard({
+export default function RestaurantCard({
   restaurantId,
   restaurantName,
   businessAddress,

@@ -54,7 +54,7 @@ const ProductCard = ({
     } else {
       setCurrentBill(pavlaka => [
         ...pavlaka,
-        {name: productName, price: price, quantity: quantity + 1},
+        {name: productName, price: price, image: image, quantity: quantity + 1},
       ]);
     }
   }, [quantity, currentBill, setCurrentBill]);

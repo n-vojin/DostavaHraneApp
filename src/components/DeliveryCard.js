@@ -40,7 +40,7 @@ export default function DeliveryCard({}) {
               padding: 4,
               borderTopLeftRadius: 10,
             }}>
-            <Text style={styles.cenaTekst}>Ukupno: {priceTotal}.00 din</Text>
+            <Text style={styles.cenaTekst}>Ukupno: {priceTotal}.00 RSD</Text>
           </View>
         </View>
       </View>
