@@ -34,7 +34,7 @@ export default function DrawerNavigator() {
           ),
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="CartScreen"
         component={CartScreen}
         options={{
@@ -54,7 +54,7 @@ export default function DrawerNavigator() {
             />
           ),
         }}
-      />
+      /> */}
       <Drawer.Screen
         name="MyAccountScreen"
         component={MyAccountScreen}

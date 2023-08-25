@@ -41,7 +41,6 @@ export default function MyAccountScreen({navigation}) {
     } catch (error) {
       console.log(error);
     }
-    setUserNameSurname(userData.firstName + ' ' + userData.lastName);
   }, []);
 
   const [editAccount, setEditAccount] = useState(false);
@@ -64,6 +63,7 @@ export default function MyAccountScreen({navigation}) {
             //TODO DODAJ!!!!!!!!!!!! (IZMENI PODATKE NALOGA)
             updateUser(userId, newFirstName, newLastName, newLocation);
             setUserNameSurname(newFirstName + ' ' + newLastName);
+
             console.log('IZMENI PODATKE NALOGA!');
           },
           style: 'destructive',
@@ -91,7 +91,9 @@ export default function MyAccountScreen({navigation}) {
         />
         <View style={styles.view2}>
           <Text style={styles.userCardText2}>Hello!</Text>
-          <Text style={styles.userCardText}>{userNameSurname}</Text>
+          <Text style={styles.userCardText}>
+            {userData.firstName} {userData.lastName}
+          </Text>
           <Text style={[styles.userCardText3]}>{userData.email}</Text>
           <Text
             style={styles.userCardTextUnderline}
@@ -124,7 +126,7 @@ export default function MyAccountScreen({navigation}) {
             <TextInput
               style={{...textInput, marginBottom: 10}}
               value={newLocation}
-              placeholder={userData.location}
+              placeholder={'Unesi lokaciju.'}
               onChangeText={text => setNewLocation(text)}
             />
 

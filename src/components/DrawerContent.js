@@ -1,26 +1,37 @@
-import React, {useState, useContext, useEffect} from 'react';
-import {
-  View,
-  Text,
-  Linking,
-  Pressable,
-  Alert,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import firestore from '@react-native-firebase/firestore';
 
 import {
   DrawerContentScrollView,
-  DrawerItemList,
   DrawerItem,
+  DrawerItemList,
 } from '@react-navigation/drawer';
 
-import {Avatar, Button, Icon} from '@rneui/base';
+import {Avatar, Icon} from '@rneui/base';
+import {signOut} from '../functions/signOut';
 import {colors} from '../global/styles';
 import SectionDividerTitle from './SectionDividerTitle';
-import {signOut} from '../functions/signOut';
+import {UserContext} from '../../App';
 
 export default function DrawerContent(props) {
+  const [userData, seUserData] = useState([]);
+
+  const userProfile = useContext(UserContext);
+  const userId = userProfile.uid;
+
+  useEffect(() => {
+    try {
+      const resData = firestore()
+        .collection('user')
+        .doc(userId)
+        .get()
+        .then(p => seUserData(p.data()));
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   return (
     <View style={styles.container}>
       <DrawerContentScrollView {...props}>
@@ -34,9 +45,11 @@ export default function DrawerContent(props) {
             }}
           />
           <View style={{paddingLeft: 6}}>
-            <Text style={styles.userCardText}>Nemanja Vojinovic</Text>
+            <Text style={styles.userCardText}>
+              {userData?.firstName} {userData?.lastName}
+            </Text>
             <Text style={[styles.userCardText, {fontWeight: '300'}]}>
-              nemanja@gmail.com
+              {userData?.email}
             </Text>
           </View>
         </View>
