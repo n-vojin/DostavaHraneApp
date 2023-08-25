@@ -8,16 +8,15 @@ import {
   StatusBar,
   FlatList,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {Button, Icon} from '@rneui/base';
 import {colors} from '../global/styles';
 import {useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 import {firestoreAutoId} from '../functions';
-
-import {checkOutData} from '../global/Data'; //! za brisati
 import {makeOrder} from '../functions/db/makeOrder';
+import {UserContext} from '../../App';
 
 function getCurrentTimeFormatted() {
   const currentTime = new Date();
@@ -39,6 +38,9 @@ function getRandomNumber() {
 }
 
 export default function CheckOutScreen({route}) {
+  const userProfile = useContext(UserContext);
+  const userId = userProfile.uid;
+
   const navigation = useNavigation();
   const {restaurantId, billArray, itemsPrice} = route.params;
   // const {restaurantId} = route.params;
@@ -83,7 +85,9 @@ export default function CheckOutScreen({route}) {
               deliveryTime: getRandomNumber(),
               totalPrice: priceFinal,
               orderId: firestoreAutoId(),
+              userId: userId,
             });
+            navigation.navigate('HomeScreen');
             //TODO   DODAJ U BAZU PODATAKA ZA ORDERS
           }}>
           <Text style={styles.buttonText}>Poruči</Text>

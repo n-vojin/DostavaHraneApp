@@ -20,9 +20,12 @@ import {
   passwordInput,
   passwordContainer,
 } from '../../global/styles';
+import {signIn} from '../../functions/singIn';
 
 const SignInScreen = ({navigation}) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   {
     return (
@@ -34,12 +37,21 @@ const SignInScreen = ({navigation}) => {
         />
         <View style={[{...centerScreenForm, marginTop: '40%'}]}>
           <Text style={[{...naslov}]}>Prijavi se</Text>
-          <TextInput style={{...textInput}} placeholder="E-mail" />
+          <TextInput
+            style={{...textInput}}
+            placeholder="E-mail"
+            autoCapitalize="none"
+            value={email}
+            onChangeText={text => setEmail(text)}
+          />
           <View style={{...passwordContainer}}>
             <TextInput
               style={{...passwordInput}}
               placeholder="Password"
               secureTextEntry={!showPassword}
+              autoCapitalize="none"
+              value={password}
+              onChangeText={text => setPassword(text)}
             />
             <TouchableOpacity
               onPress={() => {
@@ -60,11 +72,7 @@ const SignInScreen = ({navigation}) => {
           </View>
           <TouchableOpacity
             style={{...yellowButton}}
-            onPress={() => {
-              //TODO Uloguj ga ***************************
-              navigation.navigate('DrawerNavigator');
-              //?????????????????????????????????????????????????????????????? ULOGUJ GA ***************************
-            }}>
+            onPress={() => signIn(email, password)}>
             <Text style={{...yellowButtonText}}>Uloguj se</Text>
           </TouchableOpacity>
           <View style={styles.createAccountContainer}>

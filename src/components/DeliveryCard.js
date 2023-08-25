@@ -13,6 +13,7 @@ export default function DeliveryCard({
   orderTime,
   randomDeliveryTime,
   orderId,
+  userId,
 }) {
   return (
     <View style={styles.containerCartCard}>
@@ -53,7 +54,7 @@ export default function DeliveryCard({
         buttonStyle={{borderBottomRightRadius: 25, borderBottomLeftRadius: 25}}
         onPress={() => {
           //TODO OBRISI DOSTAVU IZ DATABAZE
-          deleteOrder('83qZDx2bcWUpWbO9lQfqh015Wox2', orderId);
+          deleteOrder(userId, orderId);
         }}
       />
     </View>

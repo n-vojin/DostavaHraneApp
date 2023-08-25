@@ -19,9 +19,14 @@ import {
   passwordInput,
   passwordContainer,
 } from '../../global/styles';
+import {register} from '../../functions/register';
 
 const RegisterScreen = ({navigation}) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   {
     return (
@@ -36,20 +41,30 @@ const RegisterScreen = ({navigation}) => {
           <TextInput
             style={{...textInput, marginBottom: 10}}
             placeholder="Ime"
+            value={firstName}
+            onChangeText={text => setFirstName(text)}
           />
           <TextInput
             style={{...textInput, marginBottom: 10}}
             placeholder="Prezime"
+            value={lastName}
+            onChangeText={text => setLastName(text)}
           />
           <TextInput
             style={{...textInput, marginBottom: 10}}
             placeholder="E-mail"
+            autoCapitalize="none"
+            value={email}
+            onChangeText={text => setEmail(text)}
           />
           <View style={{...passwordContainer}}>
             <TextInput
               style={{...passwordInput}}
               placeholder="Password"
               secureTextEntry={!showPassword}
+              autoCapitalize="none"
+              value={password}
+              onChangeText={text => setPassword(text)}
             />
             <TouchableOpacity
               onPress={() => {
@@ -71,7 +86,7 @@ const RegisterScreen = ({navigation}) => {
           <TouchableOpacity
             style={{...yellowButton}}
             onPress={() => {
-              //TODO  REGISTRUJ KORISNIKA I UPISI PODATKE U BAZU ***************************
+              register(email, password, firstName, lastName);
             }}>
             <Text style={{...yellowButtonText}}>Registruj se</Text>
           </TouchableOpacity>

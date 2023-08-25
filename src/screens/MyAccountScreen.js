@@ -1,43 +1,47 @@
-import React, {useState, useEffect} from 'react';
+import firestore from '@react-native-firebase/firestore';
+import {Avatar} from '@rneui/base';
+import React, {useContext, useEffect, useState} from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
   Alert,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import HeaderHomeScreen from '../components/HeaderHomeScreen';
+import {UserContext} from '../../App';
 import Header from '../components/Header';
 import {
   colors,
   naslov,
+  textInput,
   yellowButton,
   yellowButtonText,
-  textInput,
 } from '../global/styles';
-import {Avatar, Button} from '@rneui/base';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import firestore from '@react-native-firebase/firestore';
-
-const userName = 'Nemanja';
-const userSurname = 'Vojinovic';
+import {updateUser} from '../functions/update';
 
 export default function MyAccountScreen({navigation}) {
   const [userData, seUserData] = useState([]);
-  const userNameSurname = userData.firstName + ' ' + userData.lastName;
-  const userCurrentAdress = 'Proleterska 28, Radicevic';
+
+  const userProfile = useContext(UserContext);
+  const userId = userProfile.uid;
+
+  const [newFirstName, setNewFirstName] = useState('');
+  const [newLastName, setNewLastName] = useState('');
+  const [newLocation, setNewLocation] = useState('');
+  const [userNameSurname, setUserNameSurname] = useState('');
 
   useEffect(() => {
     try {
       const resData = firestore()
         .collection('user')
-        .doc('EfF0YfTYVhmJRJ7JsVCs')
+        .doc(userId)
         .get()
         .then(p => seUserData(p.data()));
     } catch (error) {
       console.log(error);
     }
+    setUserNameSurname(userData.firstName + ' ' + userData.lastName);
   }, []);
 
   const [editAccount, setEditAccount] = useState(false);
@@ -58,6 +62,8 @@ export default function MyAccountScreen({navigation}) {
           text: 'Izmeni',
           onPress: () => {
             //TODO DODAJ!!!!!!!!!!!! (IZMENI PODATKE NALOGA)
+            updateUser(userId, newFirstName, newLastName, newLocation);
+            setUserNameSurname(newFirstName + ' ' + newLastName);
             console.log('IZMENI PODATKE NALOGA!');
           },
           style: 'destructive',
@@ -91,6 +97,7 @@ export default function MyAccountScreen({navigation}) {
             style={styles.userCardTextUnderline}
             onPress={() => {
               setEditAccount(true);
+              console.log(userId);
             }}>
             Edit account
           </Text>
@@ -104,15 +111,21 @@ export default function MyAccountScreen({navigation}) {
             </Text>
             <TextInput
               style={{...textInput, marginBottom: 10}}
-              value={userData.firstName}
+              placeholder={userData.firstName}
+              value={newFirstName}
+              onChangeText={text => setNewFirstName(text)}
             />
             <TextInput
               style={{...textInput, marginBottom: 10}}
-              value={userData.lastName}
+              value={newLastName}
+              placeholder={userData.lastName}
+              onChangeText={text => setNewLastName(text)}
             />
             <TextInput
               style={{...textInput, marginBottom: 10}}
-              value={userData.location}
+              value={newLocation}
+              placeholder={userData.location}
+              onChangeText={text => setNewLocation(text)}
             />
 
             <View style={{flexDirection: 'row', marginTop: 20}}>

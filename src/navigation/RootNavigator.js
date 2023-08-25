@@ -3,7 +3,7 @@ import React from 'react';
 import AuthStack from './authNavigation';
 import {LogBox} from 'react-native';
 
-//LogBox.ignoreAllLogs(); //!Ignore all log notifications
+//LogBox.ignoreAllLogs(); //!Ignore all log notifications UKLJUCI NA KRAJU
 
 export default function RootNavigator() {
   return (

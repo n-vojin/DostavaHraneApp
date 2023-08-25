@@ -1,24 +1,21 @@
-import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  Dimensions,
-  FlatList,
-} from 'react-native';
+import React, {useState, useEffect, useContext} from 'react';
+import {StyleSheet, Text, View, Dimensions, FlatList} from 'react-native';
 import HeaderHomeScreen from '../components/HeaderHomeScreen';
 import DeliveryCard from '../components/DeliveryCard';
 import firestore from '@react-native-firebase/firestore';
+import {UserContext} from '../../App';
 
 const imaPorudzbina = true; //TODO Izmeniti dodati (DynamicData)
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function MyOrderScreen({navigation}) {
+  const userProfile = useContext(UserContext);
+  const userId = userProfile.uid;
+
   const [orders, setOrders] = useState([]);
+
   const [count, setCount] = useState(0);
-  const userId = '83qZDx2bcWUpWbO9lQfqh015Wox2';
 
   useEffect(() => {
     try {
@@ -35,22 +32,21 @@ export default function MyOrderScreen({navigation}) {
     }
   }, []);
 
-  //console.log(orders.orders);
-
-  return (
-    <View
-      style={{
-        alignItems: 'center',
-      }}>
-      <HeaderHomeScreen iconLeft="menu" navigation={navigation} />
+  console.log(orders.orders);
+  if (1 !== 0) {
+    return (
       <View
         style={{
           alignItems: 'center',
-          width: '100%',
-          marginLeft: 'auto',
-          marginRight: 'auto',
         }}>
-        {imaPorudzbina ? (
+        <HeaderHomeScreen iconLeft="menu" navigation={navigation} />
+        <View
+          style={{
+            alignItems: 'center',
+            width: '100%',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+          }}>
           <FlatList
             style={{
               width: '100%',
@@ -76,12 +72,30 @@ export default function MyOrderScreen({navigation}) {
                 orderTime={item.timeOfOrder}
                 randomDeliveryTime={item.deliveryTime}
                 orderId={item.orderId}
+                userId={userId}
               />
             )}
           />
-        ) : (
+
           <Text style={{marginTop: '80%'}}>Trenutno nemate porudzbina!</Text>
-        )}
+        </View>
+      </View>
+    );
+  }
+  return (
+    <View
+      style={{
+        alignItems: 'center',
+      }}>
+      <HeaderHomeScreen iconLeft="menu" navigation={navigation} />
+      <View
+        style={{
+          alignItems: 'center',
+          width: '100%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}>
+        <Text style={{marginTop: '80%'}}>Trenutno nemate porudzbina!</Text>
       </View>
     </View>
   );

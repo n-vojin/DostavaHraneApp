@@ -32,17 +32,7 @@ export default function HomeHeader({iconLeft, navigation, logo}) {
         source={require('../images/LogoColorful4.png')}
         resizeMode="contain"
       />
-      <View style={styles.allignJustifyCenter}>
-        <BadgeIcon
-          type="FontAwesome"
-          name="shopping-cart"
-          size={30}
-          color={colors.GHOST_WHITE}
-          onPress={() => {
-            navigation.navigate('CartScreen');
-          }}
-        />
-      </View>
+      <View style={styles.allignJustifyCenter}></View>
 
       <StatusBar
         barStyle={'light-content'}
@@ -79,5 +69,7 @@ const styles = StyleSheet.create({
   allignJustifyCenter: {
     alignItems: 'center',
     justifyContent: 'center',
+    width: 32,
+    height: 32,
   },
 });

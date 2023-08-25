@@ -1,13 +1,12 @@
-import React, {useEffect} from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import {View, Text, StyleSheet} from 'react-native';
-import RootClientTabs from './ClientTabs';
 import {Icon} from '@rneui/base';
-import {colors} from '../global/styles';
+import React from 'react';
+import {StyleSheet} from 'react-native';
 import DrawerContent from '../components/DrawerContent';
+import {colors} from '../global/styles';
 import CartScreen from '../screens/CartScreen';
 import MyAccountScreen from '../screens/MyAccountScreen';
-import {hideNavigationBar} from '@gennadysx/react-native-navigation-bar-color';
+import RootClientTabs from './ClientTabs';
 
 const Drawer = createDrawerNavigator();
 

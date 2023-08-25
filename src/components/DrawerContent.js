@@ -18,6 +18,7 @@ import {
 import {Avatar, Button, Icon} from '@rneui/base';
 import {colors} from '../global/styles';
 import SectionDividerTitle from './SectionDividerTitle';
+import {signOut} from '../functions/signOut';
 
 export default function DrawerContent(props) {
   return (
@@ -42,20 +43,20 @@ export default function DrawerContent(props) {
         <DrawerItemList {...props} />
       </DrawerContentScrollView>
       <SectionDividerTitle title={'Odjava'} />
+
       <DrawerItem
         style={{borderBottomRightRadius: 25}}
         label="Odjavi se"
+        onPress={signOut}
         icon={({color, size}) => (
-          <Icon
-            type="material-community"
-            name="logout-variant"
-            color={color}
-            size={size}
-            onPress={() => {
-              //TODO NAPRAVI SIGN OUT!!!!
-              signOut();
-            }}
-          />
+          <TouchableOpacity>
+            <Icon
+              type="material-community"
+              name="logout-variant"
+              color={color}
+              size={size}
+            />
+          </TouchableOpacity>
         )}
       />
     </View>

@@ -16,7 +16,7 @@ export const makeOrder = ({
 
   CURRENT_DOCUMENT_ID = '83qZDx2bcWUpWbO9lQfqh015Wox2';
   // Reference to the specific document
-  const docRef = db.collection('user').doc(CURRENT_DOCUMENT_ID);
+  const docRef = db.collection('user').doc(userId);
 
   // Retrieve the current orders array data
   docRef
