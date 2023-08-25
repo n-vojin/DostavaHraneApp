@@ -14,8 +14,29 @@ import {Button, Icon} from '@rneui/base';
 import {colors} from '../global/styles';
 import {useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
+import {firestoreAutoId} from '../functions';
 
 import {checkOutData} from '../global/Data'; //! za brisati
+import {makeOrder} from '../functions/db/makeOrder';
+
+function getCurrentTimeFormatted() {
+  const currentTime = new Date();
+  const hours = currentTime.getHours();
+  const minutes = currentTime.getMinutes();
+
+  // Formatting the hours and minutes to have leading zeros if needed
+  const formattedHours = hours < 10 ? `0${hours}` : hours;
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+  const currentTimeFormatted = `${formattedHours}:${formattedMinutes}`;
+
+  return currentTimeFormatted;
+}
+function getRandomNumber() {
+  const min = 34;
+  const max = 140;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 export default function CheckOutScreen({route}) {
   const navigation = useNavigation();
@@ -24,6 +45,8 @@ export default function CheckOutScreen({route}) {
 
   const [restaurantData, setRestaurantData] = useState([]);
   const priceFinal = itemsPrice + restaurantData.deliveryFee;
+
+  const [itemListString, setItemListString] = useState('');
 
   useEffect(() => {
     try {
@@ -37,6 +60,13 @@ export default function CheckOutScreen({route}) {
     }
   }, []);
 
+  // Use map to extract the desired values and create a string
+  const extractedDataString = billArray
+    .map(item => {
+      return `${item.name}: ${item.price} RSD  x ${item.quantity}`;
+    })
+    .join('\n'); // Join the array of strings with line breaks
+  console.log(extractedDataString);
   return (
     <>
       <View style={styles.buttonContainer}>
@@ -44,9 +74,16 @@ export default function CheckOutScreen({route}) {
           buttonStyle={styles.cartButton}
           style={styles.cartButton}
           onPress={() => {
-            //TODO   DODAJ U BAZU PODATAKA ZA ORDERS
-            //TODO   DODAJ U BAZU PODATAKA ZA ORDERS
-            //TODO   DODAJ U BAZU PODATAKA ZA ORDERS
+            makeOrder({
+              restaurantName: restaurantData.name,
+              timeOfOrder: getCurrentTimeFormatted(),
+              itemsInOrder: extractedDataString,
+              itemsPrice: itemsPrice,
+              deliveryFee: restaurantData.deliveryFee,
+              deliveryTime: getRandomNumber(),
+              totalPrice: priceFinal,
+              orderId: firestoreAutoId(),
+            });
             //TODO   DODAJ U BAZU PODATAKA ZA ORDERS
           }}>
           <Text style={styles.buttonText}>Poruči</Text>

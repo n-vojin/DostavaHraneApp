@@ -3,6 +3,7 @@ import '@react-native-firebase/firestore';
 
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
+import {makeOrder} from '../functions/db/makeOrder';
 
 const ADMIN_SCREEN = () => {
   // Update the array field using arrayUnion
@@ -125,6 +126,29 @@ const ADMIN_SCREEN = () => {
         onPress={addITEMS}>
         <Text style={{color: 'white', fontSize: 30, fontWeight: '500'}}>
           ADD MENU ITEMS
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{
+          width: '50%',
+          height: 200,
+          backgroundColor: 'red',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        onPress={() =>
+          makeOrder({
+            restaurantName: 'restaurantName',
+            timeOfOrder: 'timeOfOrder',
+            itemsInOrder: 'itemsInOrder',
+            itemsPrice: 'itemsPrice',
+            deliveryFee: 'deliveryFee',
+            deliveryTime: 'deliveryTime',
+            totalPrice: 'totalPrice',
+          })
+        }>
+        <Text style={{color: 'white', fontSize: 30, fontWeight: '500'}}>
+          ADD ORDER ITEMS
         </Text>
       </TouchableOpacity>
     </View>

@@ -1,35 +1,38 @@
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
 import {colors} from '../global/styles';
+import {Button} from '@rneui/base';
+import {deleteOrder} from '../functions/db/deleteOrder';
 
-const restaurantName = 'McDonalds';
-const orderContent = '2x Burger, 3x Murger, 4x Gurger, 2x Cola';
-const orderPrice = 1250;
-const deliveryPrice = 250; //TODO_______________________ za IZMENITI (Dynamic Data)
-const priceTotal = deliveryPrice + orderPrice;
-
-const randomDeliveryTime = 45;
-const orderTime = '16:32';
-
-export default function DeliveryCard({}) {
+export default function DeliveryCard({
+  restaurantName,
+  orderContent,
+  orderPrice,
+  deliveryPrice,
+  priceTotal,
+  orderTime,
+  randomDeliveryTime,
+  orderId,
+}) {
   return (
     <View style={styles.containerCartCard}>
       <View style={styles.topContainer}>
-        <Text style={styles.titleText}>Dostava</Text>
+        <Text style={styles.titleText}>Porudžbina</Text>
       </View>
 
       <View style={styles.botContainer}>
         <ScrollView style={styles.orderDetailContainer}>
-          <Text style={styles.text1}>
-            Restoran: {restaurantName} . . . . . . {orderTime}
-          </Text>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text style={styles.text1}>Iz: {restaurantName}</Text>
+            <Text style={styles.text1}> u {orderTime} </Text>
+          </View>
           <Text style={styles.text2}>{orderContent}</Text>
           <Text style={styles.text2}>= {orderPrice} RSD</Text>
           <Text style={styles.text2}>Cena dostave: {deliveryPrice} RSD</Text>
         </ScrollView>
         <View style={{flexDirection: 'row'}}>
           <Text style={[styles.text2, {marginTop: 5, marginRight: 10}]}>
-            Vreme dostave ~ {randomDeliveryTime} min
+            Dostava trajanje ~ {randomDeliveryTime} min
           </Text>
           <View
             style={{
@@ -44,13 +47,22 @@ export default function DeliveryCard({}) {
           </View>
         </View>
       </View>
+      <Button
+        title="Potvrdi zavrsenu dostavu"
+        color={colors.SECONDARY_GREEN}
+        buttonStyle={{borderBottomRightRadius: 25, borderBottomLeftRadius: 25}}
+        onPress={() => {
+          //TODO OBRISI DOSTAVU IZ DATABAZE
+          deleteOrder('83qZDx2bcWUpWbO9lQfqh015Wox2', orderId);
+        }}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   containerCartCard: {
-    width: '95%',
+    width: '100%',
     backgroundColor: colors.GHOST_WHITE,
     borderColor: colors.DEFAULT_GREEN,
     borderWidth: 1,
@@ -76,6 +88,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   topContainer: {
+    width: '100%',
     flex: 0.75,
     flexDirection: 'row',
     borderBottomWidth: 1,
