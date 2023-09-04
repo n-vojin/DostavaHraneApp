@@ -1,23 +1,19 @@
+import firestore from '@react-native-firebase/firestore';
 import React, {useEffect, useState} from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
   FlatList,
-  TouchableOpacity,
   Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import {colors, parameters} from '../global/styles';
 import HeaderHomeScreen from '../components/HeaderHomeScreen';
-import SectionDividerTitle from '../components/SectionDividerTitle';
 import RestaurantCard from '../components/RestaurantCard';
-import {restaurantsData, filterData} from '../global/Data';
-import {Icon} from '@rneui/base';
-import firestore from '@react-native-firebase/firestore';
-
-const dummyUrl =
-  'https://media-cldnry.s-nbcnews.com/image/upload/newscms/2021_34/1765652/squareat-inline-01-khu-210825.jpg';
+import SectionDividerTitle from '../components/SectionDividerTitle';
+import {filterData} from '../global/Data';
+import {colors} from '../global/styles';
 
 export default function HomeScreen({navigation}) {
   const [restaurants, setRestaurants] = useState([]);

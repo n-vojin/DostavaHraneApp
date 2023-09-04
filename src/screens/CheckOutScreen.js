@@ -17,6 +17,7 @@ import firestore from '@react-native-firebase/firestore';
 import {firestoreAutoId} from '../functions';
 import {makeOrder} from '../functions/db/makeOrder';
 import {UserContext} from '../../App';
+import Toast from 'react-native-simple-toast';
 
 function getCurrentTimeFormatted() {
   const currentTime = new Date();
@@ -46,6 +47,7 @@ export default function CheckOutScreen({route}) {
   // const {restaurantId} = route.params;
 
   const [restaurantData, setRestaurantData] = useState([]);
+  const [userData, setUserData] = useState([]);
   const priceFinal = itemsPrice + restaurantData.deliveryFee;
 
   const [itemListString, setItemListString] = useState('');
@@ -57,6 +59,18 @@ export default function CheckOutScreen({route}) {
         .doc(restaurantId)
         .get()
         .then(p => setRestaurantData(p.data()));
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      const resData = firestore()
+        .collection('user')
+        .doc(userId)
+        .get()
+        .then(p => setUserData(p.data()));
     } catch (error) {
       console.log(error);
     }
@@ -88,6 +102,7 @@ export default function CheckOutScreen({route}) {
               userId: userId,
             });
             navigation.navigate('HomeScreen');
+            Toast.show('USPEŠNO DODATO U PORUDŽBINE.');
             //TODO   DODAJ U BAZU PODATAKA ZA ORDERS
           }}>
           <Text style={styles.buttonText}>Poruči</Text>
@@ -95,83 +110,100 @@ export default function CheckOutScreen({route}) {
         </Button>
       </View>
 
-      <ScrollView style={{flex: 1}}>
+      <View style={{flex: 1}}>
         <StatusBar
           barStyle={'light-content'}
           backgroundColor={colors.SECONDARY_GREEN}
         />
-
-        <View style={styles.imageContainer}>
-          <ImageBackground
-            style={styles.bacgroundImage}
-            source={{
-              uri: restaurantData?.image,
-            }}
-            resizeMode="contain"
-          />
-          <TouchableOpacity
-            style={styles.backArrowContainer}
-            onPress={() => {
-              navigation.goBack();
-            }}>
-            <Icon
-              type="material-community"
-              name="arrow-left"
-              color={colors.SECONDARY_GREEN}
-              size={35}
+        <ScrollView>
+          <View style={styles.imageContainer}>
+            <ImageBackground
+              style={styles.bacgroundImage}
+              source={{
+                uri: restaurantData?.image,
+              }}
+              resizeMode="contain"
             />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.detailView}>
-          <Text style={styles.restaurantTitle}>CHECKOUT</Text>
-          <View style={styles.titleView}>
-            <Text style={styles.restaurantTitle2}>{restaurantData.name}</Text>
-            <View style={styles.view50}>
-              <Icon type={'material-comunity'} name="moped" size={23} />
-              {restaurantData.deliveryFee === 0 ? (
-                <Text>Free</Text>
-              ) : (
-                <Text>{restaurantData.deliveryFee} RSD</Text>
-              )}
-            </View>
+            <TouchableOpacity
+              style={styles.backArrowContainer}
+              onPress={() => {
+                navigation.goBack();
+              }}>
+              <Icon
+                type="material-community"
+                name="arrow-left"
+                color={colors.SECONDARY_GREEN}
+                size={35}
+              />
+            </TouchableOpacity>
           </View>
 
-          <View style={styles.reciept}>
-            <View style={styles.recieptDivider}></View>
-            <FlatList
-              scrollEnabled={false}
-              style={{width: '100%'}}
-              data={billArray}
-              renderItem={({item, index}) => (
-                <View style={{alignContent: 'flex-start'}}>
-                  <Image
-                    style={styles.productImage}
-                    source={{uri: item.image}}
-                  />
-                  <View style={styles.recieptBar}>
-                    <Text style={[styles.textSemibold, {flex: 10}]}>
-                      {item.name}:
-                    </Text>
-                    <View style={{flexDirection: 'row'}}>
-                      <Text>{item.quantity} x </Text>
-                      <Text> {item.price}.00 RSD</Text>
+          <View style={styles.detailView}>
+            <Text style={styles.restaurantTitle}>CHECKOUT</Text>
+            <View style={styles.titleView}>
+              <Text style={styles.restaurantTitle2}>{restaurantData.name}</Text>
+              <View style={styles.view50}>
+                <Icon type={'material-comunity'} name="moped" size={23} />
+                {restaurantData.deliveryFee === 0 ? (
+                  <Text>Free</Text>
+                ) : (
+                  <Text>{restaurantData.deliveryFee} RSD</Text>
+                )}
+              </View>
+            </View>
+
+            <View style={styles.reciept}>
+              <View style={styles.recieptDivider}></View>
+              <FlatList
+                scrollEnabled={false}
+                style={{width: '100%'}}
+                data={billArray}
+                renderItem={({item, index}) => (
+                  <View style={{alignContent: 'flex-start'}}>
+                    <Image
+                      style={styles.productImage}
+                      source={{uri: item.image}}
+                    />
+                    <View style={styles.recieptBar}>
+                      <Text style={[styles.textSemibold, {flex: 10}]}>
+                        {item.name}:
+                      </Text>
+                      <View style={{flexDirection: 'row'}}>
+                        <Text>{item.quantity} x </Text>
+                        <Text> {item.price}.00 RSD</Text>
+                      </View>
                     </View>
                   </View>
-                </View>
-              )}
-              horizontal={false}
-            />
-            <View style={[styles.recieptBar, {borderTopWidth: 2}]}>
-              <Text>Dostava:</Text>
-              <Text>{restaurantData.deliveryFee}.00 RSD</Text>
-            </View>
-            <View style={styles.recieptBarFinal}>
-              <Text style={styles.textFinal}>UKUPNO:</Text>
-              <Text style={styles.textFinal}>{priceFinal}.00 RSD</Text>
+                )}
+                horizontal={false}
+              />
+              <View style={[styles.recieptBar, {borderTopWidth: 2}]}>
+                <Text>Dostava:</Text>
+                <Text>{restaurantData.deliveryFee}.00 RSD</Text>
+              </View>
+              <View style={styles.recieptBarFinal}>
+                <Text style={styles.textFinal}>UKUPNO:</Text>
+                <Text style={styles.textFinal}>{priceFinal}.00 RSD</Text>
+              </View>
+              <View
+                style={[
+                  styles.recieptBar,
+                  {justifyContent: 'flex-start', marginTop: 20},
+                ]}>
+                <Icon
+                  type="material"
+                  name="place"
+                  color={colors.gray2}
+                  size={22}
+                />
+                <Text style={{paddingLeft: 10, fontSize: 15}}>
+                  Na adresu: {userData.location}
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     </>
   );
 }
@@ -209,6 +241,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     backgroundColor: colors.GHOST_WHITE,
     alignItems: 'center',
+    paddingBottom: 200,
   },
   restaurantTitle: {
     fontSize: 27,

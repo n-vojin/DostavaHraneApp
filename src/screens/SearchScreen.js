@@ -10,7 +10,6 @@ import {
   Keyboard,
 } from 'react-native';
 import HeaderHomeScreen from '../components/HeaderHomeScreen';
-import {filterData} from '../global/Data';
 import {colors} from '../global/styles';
 
 import * as Animatable from 'react-native-animatable';

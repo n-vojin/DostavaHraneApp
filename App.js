@@ -13,7 +13,7 @@ import RegisterScreen from './src/screens/authScreens/RegisterScreen';
 import DrawerNavigator from './src/navigation/DrawerNavigator';
 
 import {LogBox} from 'react-native';
-//LogBox.ignoreAllLogs(); //!Ignore all log notifications UKLJUCI NA KRAJU
+LogBox.ignoreAllLogs(); //!Ignore all log notifications UKLJUCI NA KRAJU
 //!!!
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';

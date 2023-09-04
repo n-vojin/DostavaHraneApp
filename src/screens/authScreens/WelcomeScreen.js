@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  StatusBar,
+} from 'react-native';
 import {
   colors,
   naslov,
@@ -29,6 +36,10 @@ export default function WelcomeScreen({navigation}) {
   //  }, []);
   return (
     <View style={styles.container}>
+      <StatusBar
+        barStyle={'light-content'}
+        backgroundColor={colors.SECONDARY_GREEN}
+      />
       <Text style={[{...naslov}, styles.velikiTekst]}>
         Najbrži u vašem gradu, a i šire!
       </Text>
