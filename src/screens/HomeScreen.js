@@ -8,6 +8,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  PermissionsAndroid,
 } from 'react-native';
 import HeaderHomeScreen from '../components/HeaderHomeScreen';
 import RestaurantCard from '../components/RestaurantCard';
@@ -24,6 +25,19 @@ export default function HomeScreen({navigation}) {
   const filteredRestaurants = restaurants.filter(item =>
     item.foodType.includes(categorySelected),
   );
+
+  async function requestPermissions() {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      _getCourts();
+    }
+  }
+
+  useEffect(() => {
+    requestPermissions();
+  }, []);
 
   useEffect(() => {
     try {

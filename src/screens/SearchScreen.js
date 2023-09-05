@@ -1,21 +1,12 @@
-import React, {useState, useRef, useEffect} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  Image,
-  TextInput,
-  Keyboard,
-} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {FlatList, StyleSheet, TextInput, View} from 'react-native';
 import HeaderHomeScreen from '../components/HeaderHomeScreen';
 import {colors} from '../global/styles';
 
-import * as Animatable from 'react-native-animatable';
-import {Icon} from '@rneui/base';
-import RestaurantCard from '../components/RestaurantCard';
 import firestore from '@react-native-firebase/firestore';
+import {Icon} from '@rneui/base';
+import * as Animatable from 'react-native-animatable';
+import RestaurantCard from '../components/RestaurantCard';
 
 export default function SearchScreen({navigation}) {
   const [restaurants, setRestaurants] = useState([]);

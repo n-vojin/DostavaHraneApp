@@ -9,7 +9,7 @@ import {
   FlatList,
 } from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
-import {TouchableOpacity} from 'react-native';
+import {TouchableOpacity, PermissionsAndroid} from 'react-native';
 import {Button, Icon} from '@rneui/base';
 import {colors} from '../global/styles';
 import {useNavigation} from '@react-navigation/native';
@@ -18,6 +18,8 @@ import {firestoreAutoId} from '../functions';
 import {makeOrder} from '../functions/db/makeOrder';
 import {UserContext} from '../../App';
 import Toast from 'react-native-simple-toast';
+import Geolocation from 'react-native-geolocation-service';
+import axios from 'axios';
 
 function getCurrentTimeFormatted() {
   const currentTime = new Date();
@@ -49,8 +51,29 @@ export default function CheckOutScreen({route}) {
   const [restaurantData, setRestaurantData] = useState([]);
   const [userData, setUserData] = useState([]);
   const priceFinal = itemsPrice + restaurantData.deliveryFee;
+  const [currentLocation, setCurrentLocation] = useState('');
 
   const [itemListString, setItemListString] = useState('');
+
+  useEffect(() => {
+    try {
+      Geolocation?.getCurrentPosition(
+        position => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+
+          // Call a function to fetch the address based on latitude and longitude
+          setCurrentLocation(fetchAddressFromCoordinates(latitude, longitude));
+        },
+        error => {
+          console.error(error);
+        },
+        {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   useEffect(() => {
     try {
@@ -75,6 +98,26 @@ export default function CheckOutScreen({route}) {
       console.log(error);
     }
   }, []);
+  function fetchAddressFromCoordinates(latitude, longitude) {
+    const apiKey = 'AIzaSyCvRe4bSXipixapHIrc6L1bRJuXyY3ixwE';
+    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
+
+    axios
+      .get(apiUrl)
+      .then(response => {
+        const results = response.data.results;
+        if (results && results.length > 0) {
+          const address = results[0].formatted_address;
+          setCurrentLocation(address);
+          console.log('User Address:', address);
+        } else {
+          console.warn('No address found for coordinates.');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching address:', error);
+      });
+  }
 
   // Use map to extract the desired values and create a string
   const extractedDataString = billArray
@@ -85,31 +128,38 @@ export default function CheckOutScreen({route}) {
   console.log(extractedDataString);
   return (
     <>
-      <View style={styles.buttonContainer}>
-        <Button
-          buttonStyle={styles.cartButton}
-          style={styles.cartButton}
-          onPress={() => {
-            makeOrder({
-              restaurantName: restaurantData.name,
-              timeOfOrder: getCurrentTimeFormatted(),
-              itemsInOrder: extractedDataString,
-              itemsPrice: itemsPrice,
-              deliveryFee: restaurantData.deliveryFee,
-              deliveryTime: getRandomNumber(),
-              totalPrice: priceFinal,
-              orderId: firestoreAutoId(),
-              userId: userId,
-            });
-            navigation.navigate('HomeScreen');
-            Toast.show('USPEŠNO DODATO U PORUDŽBINE.');
-            //TODO   DODAJ U BAZU PODATAKA ZA ORDERS
-          }}>
-          <Text style={styles.buttonText}>Poruči</Text>
-          <Text style={styles.buttonText}>{priceFinal}.00 RSD</Text>
-        </Button>
-      </View>
-
+      {currentLocation === '' && userData.location === '' ? (
+        <View style={styles.buttonContainer2}>
+          <Button buttonStyle={styles.cartButton2} style={styles.cartButton2}>
+            <Text style={styles.buttonText}>Uključite / Unesite lokaciju!</Text>
+          </Button>
+        </View>
+      ) : (
+        <View style={styles.buttonContainer}>
+          <Button
+            buttonStyle={styles.cartButton}
+            style={styles.cartButton}
+            onPress={() => {
+              makeOrder({
+                restaurantName: restaurantData.name,
+                timeOfOrder: getCurrentTimeFormatted(),
+                itemsInOrder: extractedDataString,
+                itemsPrice: itemsPrice,
+                deliveryFee: restaurantData.deliveryFee,
+                deliveryTime: getRandomNumber(),
+                totalPrice: priceFinal,
+                orderId: firestoreAutoId(),
+                userId: userId,
+              });
+              navigation.navigate('HomeScreen');
+              Toast.show('USPEŠNO DODATO U PORUDŽBINE.');
+              //TODO   DODAJ U BAZU PODATAKA ZA ORDERS
+            }}>
+            <Text style={styles.buttonText}>Poruči</Text>
+            <Text style={styles.buttonText}>{priceFinal}.00 RSD</Text>
+          </Button>
+        </View>
+      )}
       <View style={{flex: 1}}>
         <StatusBar
           barStyle={'light-content'}
@@ -197,7 +247,8 @@ export default function CheckOutScreen({route}) {
                   size={22}
                 />
                 <Text style={{paddingLeft: 10, fontSize: 15}}>
-                  Na adresu: {userData.location}
+                  Do:{' '}
+                  {currentLocation !== '' ? currentLocation : userData.location}
                 </Text>
               </View>
             </View>
@@ -271,10 +322,28 @@ const styles = StyleSheet.create({
     bottom: 35,
     left: '10%',
   },
+  buttonContainer2: {
+    position: 'absolute',
+    border: '1px solid transparent',
+    width: '80%',
+    height: 55,
+    zIndex: 40,
+    bottom: 35,
+    left: '10%',
+  },
   cartButton: {
     width: '100%',
     height: 55,
     backgroundColor: colors.SECONDARY_GREEN,
+    borderRadius: 38,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingHorizontal: 20,
+  },
+  cartButton2: {
+    width: '100%',
+    height: 55,
+    backgroundColor: colors.CANCEL_BUTTON_RED,
     borderRadius: 38,
     flexDirection: 'row',
     justifyContent: 'space-around',

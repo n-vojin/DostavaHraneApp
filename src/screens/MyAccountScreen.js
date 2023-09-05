@@ -47,7 +47,7 @@ export default function MyAccountScreen({navigation}) {
 
   const handleIzmenaPress = () => {
     Alert.alert(
-      'Podvrdite akicju',
+      'Podvrdite akciju',
       'Da li ste sigurni da želite da IZMENITE podatke o nalogu?',
       [
         {

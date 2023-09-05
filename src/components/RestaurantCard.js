@@ -19,7 +19,6 @@ export default function RestaurantCard({
     <TouchableOpacity
       style={{marginBottom: 30}}
       onPress={() => {
-        // TODO proslediti RestaurantScreen ID   NE RADI???????????????
         navigation.navigate('RestaurantScreen', {
           restaurantId: restaurantId,
         });

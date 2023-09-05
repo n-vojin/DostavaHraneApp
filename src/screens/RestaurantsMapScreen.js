@@ -27,9 +27,6 @@ const RestaurantsMapScreen = ({navigation}) => {
 
   const [selectedMarker, setSelectedMarker] = useState(null);
 
-  const handleMarkerPress = marker => {
-    setSelectedMarker(marker === selectedMarker ? null : marker);
-  };
   return (
     <View>
       <HeaderHomeScreen iconLeft="menu" navigation={navigation} />
@@ -53,17 +50,6 @@ const RestaurantsMapScreen = ({navigation}) => {
           />
         ))}
       </MapView>
-      <TouchableOpacity
-        style={{
-          position: 'absolute',
-          bottom: 50,
-          alignSelf: 'center',
-          padding: 10,
-          backgroundColor: colors.SECONDARY_YELLOW,
-        }}
-        onPress={() => handleMarkerPress(markers[0])}>
-        <Text style={{color: 'white'}}>Toggle Focus</Text>
-      </TouchableOpacity>
     </View>
   );
 };
